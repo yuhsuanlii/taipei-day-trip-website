@@ -138,5 +138,6 @@ def booking():
 def thankyou():
 	return render_template("thankyou.html")
 
+
 if __name__=="__main__":
     app.run(host="0.0.0.0", port=3000, debug=True)
