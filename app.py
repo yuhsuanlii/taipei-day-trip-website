@@ -7,7 +7,7 @@ app.config["TEMPLATES_AUTO_RELOAD"]=True
 app.config["JSON_SORT_KEYS"]=False
 
 app.config['SECRET_KEY'] = b'\x8f\xef\xa5\xba#8.9\xa5A]\xdd\xc4\x1b\x8d\x0c'
-conn = pymysql.connect(host='localhost',user='root',password='rootroot',db='daytrip',charset='utf8')
+conn = pymysql.connect(host='localhost',user='root',password='root',db='daytrip',charset='utf8')
 cur = conn.cursor()
 
 # API
@@ -43,14 +43,7 @@ def attractions():
                 data_dic["mrt"] = record[i][6]
                 data_dic["latitude"] = record[i][7]
                 data_dic["longitude"] = record[i][8]
-                
-                imgsql = "SELECT images FROM attraction where id = %s"
-                params = record[i][0],
-                cur.execute(imgsql,params)
-                imgdata = cur.fetchall()
-                for imgurl in imgdata:
-                    img_arr = "".join(imgurl).split(", ")
-                    data_dic["images"] = img_arr
+                data_dic["images"] = record[i][9].split(", ")
 
                 result.append(data_dic)
 
@@ -93,14 +86,7 @@ def attractionId(attractionId):
                 data_dic["mrt"] = record[i][6]
                 data_dic["latitude"] = record[i][7]
                 data_dic["longitude"] = record[i][8]
-
-                imgsql = "SELECT images FROM attraction where id = %s"
-                params = record[i][0],
-                cur.execute(imgsql,params)
-                imgdata = cur.fetchall()
-                for imgurl in imgdata:
-                    img_arr = "".join(imgurl).split(", ")
-                    data_dic["images"] = img_arr
+                data_dic["images"] = record[i][9].split(", ")
 
             return make_response(jsonify(data = data_dic),200,
                                     {'ContentType':'application/json'})
