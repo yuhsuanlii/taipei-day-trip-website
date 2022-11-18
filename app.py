@@ -6,8 +6,8 @@ app.config["JSON_AS_ASCII"]=False
 app.config["TEMPLATES_AUTO_RELOAD"]=True
 app.config["JSON_SORT_KEYS"]=False
 
-app.config['SECRET_KEY'] = 'secret'
-conn = pymysql.connect(host='localhost',user='root',password='123',db='daytrip',charset='utf8')
+app.config['SECRET_KEY'] = b'\x8f\xef\xa5\xba#8.9\xa5A]\xdd\xc4\x1b\x8d\x0c'
+conn = pymysql.connect(host='localhost',user='root',password='rootroot',db='daytrip',charset='utf8')
 cur = conn.cursor()
 
 # API

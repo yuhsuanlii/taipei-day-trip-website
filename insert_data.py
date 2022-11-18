@@ -4,7 +4,7 @@ import json
 with open('taipei-day-trip-website/data/taipei-attractions.json',encoding='UTF-8') as f:
     data = json.load(f)
 data = data['result']
-conn = pymysql.connect(host='localhost',user='root',password='123',db='daytrip',charset='utf8')
+conn = pymysql.connect(host='localhost',user='root',password='rootroot',db='daytrip',charset='utf8')
 cur = conn.cursor()
 
 for d in data.get('results'):
