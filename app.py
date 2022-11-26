@@ -1,5 +1,5 @@
 from flask import *
-import pymysql
+import mysql.connector
 
 app=Flask(__name__)
 app.config["JSON_AS_ASCII"]=False
@@ -7,8 +7,10 @@ app.config["TEMPLATES_AUTO_RELOAD"]=True
 app.config["JSON_SORT_KEYS"]=False
 
 app.config['SECRET_KEY'] = b'\x8f\xef\xa5\xba#8.9\xa5A]\xdd\xc4\x1b\x8d\x0c'
-conn = pymysql.connect(host='localhost',user='root',password='rootroot',db='daytrip',charset='utf8')
-cur = conn.cursor()
+conn = mysql.connector.connect(host='localhost',user='root',password='rootroot',db='daytrip')
+cur = conn.cursor(buffered=True)
+cur.execute('SET SESSION WAIT_TIMEOUT = 2147483')
+
 
 # API
 @app.route("/api/attractions", methods=["GET"])
@@ -21,12 +23,11 @@ def attractions():
     page_size = 12
     
     if keyword=="":
-        sql = "SELECT * FROM attraction LIMIT %s, 12"
-        params = (page*page_size)
+        sql = "SELECT * FROM attraction LIMIT %s, %s"
+        cur.execute(sql,(page*page_size,12))
     else:
-        sql = "SELECT * FROM attraction WHERE name REGEXP %s OR category= %s LIMIT %s, 12"
-        params = (str(keyword),str(keyword),page*page_size)
-    cur.execute(sql,params)
+        sql = "SELECT * FROM attraction WHERE name REGEXP %s OR category= %s LIMIT %s, %s"
+        cur.execute(sql,(str(keyword),str(keyword),page*page_size,12))
     record = cur.fetchall()
     
     try:
@@ -70,8 +71,8 @@ def attractions():
 @app.route("/api/attraction/<attractionId>", methods=['GET'])
 def attractionId(attractionId):
     sql = "SELECT * FROM attraction WHERE id = %s"
-    params = attractionId
-    cur.execute(sql,params)
+    id = (str(attractionId),)
+    cur.execute(sql,id)
     record = cur.fetchall()
     try:
         if len(record) > 0:
