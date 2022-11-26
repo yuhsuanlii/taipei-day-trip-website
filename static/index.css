@@ -1,0 +1,428 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
+
+body{
+    font-family: 'Noto Sans TC', '微軟正黑體', sans-serif;
+    margin: 0px;
+}
+
+.pic {
+    width: 200px;
+}
+
+.item1 {
+    background-color: lightblue;
+    padding: 20px 0;
+    text-align: center;
+}
+
+#welcometitle{
+    position: absolute;
+    top: 150px;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 24px;
+    color: #F8F8F8;
+}
+
+#welcometext{
+    position: absolute;
+    top: 190px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 13px;
+    color: #F8F8F8;
+
+}
+
+.searchbar{
+    position: absolute;
+    top: 220px;
+  
+}
+
+
+#search{
+
+
+    float: left;
+    border: none;
+    border-radius: 5px 0px 0px 5px;
+    height: 26px;
+    padding: 10px;
+    /* max-width: 400px; */
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 13px;
+    color: #757575;
+    outline: none;
+}
+
+#searchbtn{
+    float: right;
+    position: absolute;
+    width: 60px;
+    height: 46px;
+    background-color: #448899;
+    border: none;
+    border-radius: 0px 5px 5px 0px;
+    background-image: url(/static/img/icon_search.png);
+    background-size: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.searchmenu{
+    height: 125px;
+    display: grid;
+    gap: 3px;
+    position: absolute;
+    top: 275px;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    border: solid;
+    border-width: 1px;
+    border-color: #7575755b;
+    /* visibility: hidden; */
+}
+
+
+.show.searchmenu {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+.category:hover{
+    background-color: #E8E8E8;
+}
+
+.category{
+
+    padding: 10px;
+    line-height: 50%;
+    float: right;
+    position: relative;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+}
+
+
+#welcomepic{
+    object-fit: cover;
+    height: 320px;
+    width: 100%;
+    object-position: left top;
+}
+
+
+
+.taipei{
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 34px;
+    color: #448899;
+}
+.c1{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 34px;
+    color: #666666;
+    text-decoration: none;
+}
+
+.nav-container{
+    background-color: #FFFFFF;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+    
+}
+
+.header{
+
+    /* 最寬1200px */
+    width: min(90%, 1200px); 
+    height: 34px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+}
+
+.desc>#info{
+    position: relative;
+    padding: 10px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    color: #FFFFFF; 
+    float: left;
+}
+
+.mrt{
+    padding: 10px;
+    line-height:50%;
+    float: left;
+    position: relative;
+    font-size: 16px;
+}
+
+.cardcategory{
+
+    padding: 10px;
+    line-height: 50%;
+    float: right;
+    position: relative;
+    font-size: 16px;
+}
+
+
+
+
+footer{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px;
+    background: #757575;
+}
+footer>div{
+
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 13px;
+    color: #FFFFFF;
+    
+}
+
+.noattr {
+    line-height: 300px;
+    width: 200px;
+    display:block; 
+    margin:auto;
+    background-size: cover;
+  }
+  
+
+
+
+
+
+@media only screen and (min-width: 1201px) {
+
+
+    .searchmenu{
+        grid-template-columns: 120px 120px 120px;
+        width: 396px;
+    }
+
+    #search{
+        width: 380px;
+    }
+
+    #welcometitle, 
+    #welcometext, 
+    .searchbar, 
+    .searchmenu{
+        left: 8.8%;
+    }
+
+
+    .mycard {
+
+        border-color: #FFFFFF;
+        border-top-width: 0px;
+        border-left-width: 0px;
+        border-right-width: 0px;
+        border-bottom-width:30px;
+        border-style:solid;
+
+        width: 100%;
+        display: grid;
+        grid-template-columns: 270px 270px 270px 270px;
+        place-content: center;
+        gap: 30px;
+     
+    }
+
+
+    .desc {
+        position:absolute ;
+        bottom: 45px;
+        color: #FFFFFF;
+        background-color:#0000007e;
+        /* opacity: 0.6; */
+        width: 270px;
+       
+    }
+
+    .card {
+
+        position: relative;
+        width: 270px;
+        background-color: #FFFFFF;
+        height: 245px;
+        border-radius: 5px;
+        border-style: solid;
+        border-color: #e6e6e689;
+        
+    }
+
+
+
+
+    .pic {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        height: 200px;
+        border-radius: 5px 5px 0px 0px;
+    }
+
+
+}
+
+@media only screen and (max-width: 1200px) {
+
+    .searchmenu{
+        grid-template-columns: 120px 120px 120px;
+        width: 396px;
+    }
+
+    #search{
+        width: 380px;
+    }
+
+
+    #welcometitle, 
+    #welcometext, 
+    .searchbar,
+    .searchmenu{
+        left: 5.2%;
+    }
+
+
+    .mycard {
+
+        border-color: #FFFFFF;
+        border-top-width: 0px;
+        border-left-width: 0px;
+        border-right-width: 0px;
+        border-bottom-width:30px;
+        border-style:solid;
+
+        width: 100%;
+        display: grid;
+        /* 方塊大小 */
+        grid-template-columns: 45% 45%;
+        /* 置中間距 */
+        place-content: center; 
+        gap: 30px;
+        
+    }
+
+
+
+    .desc {
+        position:absolute ;
+        bottom: 45px;
+        color: #FFFFFF;
+        background-color:#0000007e;
+        /* opacity: 0.1; */
+        width: 100%;
+        
+    }
+
+    .card {
+        position: relative;
+        width: 100%;
+        background-color: #FFFFFF;
+        height: 225px;
+        border-radius: 5px;
+        border-style: solid;
+        border-color: #e6e6e689;
+    }
+
+
+
+
+    .pic {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        max-height: 180px;
+        border-radius: 5px 5px 0px 0px;
+    }
+
+}
+
+@media only screen and (max-width: 600px) {
+
+    .searchmenu{
+        grid-template-columns: 102px 102px 102px;
+        width: 321px;
+    }
+
+    #search{
+        width: 230px;
+    }
+
+    #welcometitle,
+    #welcometext, 
+    .searchbar, 
+    .searchmenu{
+        left: 5.2%;
+    }
+
+
+    .mycard {
+
+        border-color: #FFFFFF;
+        border-top-width: 0px;
+        border-left-width: 0px;
+        border-right-width: 0px;
+        border-bottom-width:30px;
+        border-style:solid;
+
+        width: 100%;
+        display: grid;
+        grid-template-columns: 90%;
+        place-content: center;
+        gap: 30px;
+        
+    }
+
+    .desc {
+        position:absolute ;
+        bottom: 45px;
+        color: #FFFFFF;
+        background-color:#0000007e;
+        /* opacity: 0.6; */
+        width: 100%;
+        
+    }
+
+
+    .card {
+        position: relative;
+        width: 100%;
+        background-color: #FFFFFF;
+        height: 280px;
+        border-radius: 5px;
+        border-style: solid;
+        border-color: #e6e6e689;
+    }
+
+
+    .pic {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        max-height: 235px;
+        border-radius: 5px 5px 0px 0px;
+    }
+
+}

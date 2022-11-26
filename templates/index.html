@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>week-3 Opendata</title>
+    <link rel="stylesheet" href="/static/index.css">
+</head>
+
+<body>
+    <!-- header -->
+    <div class="nav-container">
+        <nav class="header">
+            <div class="taipei">台北一日遊</div>
+            <div>
+                <span><a class="c1" href="">預定行程</a>&emsp;</span>
+                <span><a class="c1" href="">登入/註冊</a></span>
+            </div>
+        </nav>
+    </div>
+    <br><br>
+
+    <div id="welcomebg">
+        <div id="welcometitle">輕鬆享受台北一日悠閒</div>
+        <div id="welcometext">探索每個角落，體驗城市的深度旅遊行程</div>
+        <label for="search" class="searchbar">
+            <input id="search" type="text" placeholder="輸入景點名稱查詢" autocomplete="off">
+            <button id="searchbtn" onclick="getKeyword()"></button>
+        </label>
+
+        <div class="searchmenu show" id="searchmenu">
+        </div>
+
+
+        <img src="/static/img/welcome.png" alt="" id="welcomepic">
+    </div>
+
+    <br><br>
+
+    <!-- main -->
+    <section class="container" id="container">
+    </section>
+ 
+    <!-- footer -->
+    <footer class="footer">
+        <div>COPYRIGHT © 2022 台北一日遊</div>
+    </footer>
+
+    <!-- JS -->
+    <script src="/static/index.js"></script>
+
+</body>
+</html>
