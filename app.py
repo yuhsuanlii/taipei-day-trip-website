@@ -9,6 +9,8 @@ app.config["JSON_SORT_KEYS"]=False
 app.config['SECRET_KEY'] = b'\x8f\xef\xa5\xba#8.9\xa5A]\xdd\xc4\x1b\x8d\x0c'
 conn = mysql.connector.connect(host='localhost',user='root',password='rootroot',db='daytrip')
 cur = conn.cursor(buffered=True)
+cur.execute('SET SESSION WAIT_TIMEOUT = 2147483')
+
 
 # API
 @app.route("/api/attractions", methods=["GET"])
