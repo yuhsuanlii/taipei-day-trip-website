@@ -83,6 +83,7 @@ async function getKeyword() {
         container.removeChild(container.lastElementChild);
         console.log(container.children);
     }
+    currentPage = 0;
     keyword = search.value;
     await fetch(`${originURL}/api/attractions?page=${currentPage}&keyword=${keyword}`
     ).then((response) => response.json()
