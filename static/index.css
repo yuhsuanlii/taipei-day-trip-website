@@ -106,6 +106,14 @@ body{
     line-height: 20px;
 }
 
+.banner {
+    width: min(90%, 1200px);
+    height: 34px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+}
 
 #welcomepic{
     object-fit: cover;
@@ -224,12 +232,6 @@ footer>div{
         width: 380px;
     }
 
-    #welcometitle, 
-    #welcometext, 
-    .searchbar, 
-    .searchmenu{
-        left: 8.8%;
-    }
 
 
     .mycard {
@@ -243,7 +245,7 @@ footer>div{
 
         width: 100%;
         display: grid;
-        grid-template-columns: 270px 270px 270px 270px;
+        grid-template-columns: 277px 277px 277px 277px;
         place-content: center;
         gap: 30px;
      
@@ -297,13 +299,6 @@ footer>div{
         width: 380px;
     }
 
-
-    #welcometitle, 
-    #welcometext, 
-    .searchbar,
-    .searchmenu{
-        left: 5.2%;
-    }
 
 
     .mycard {
@@ -371,12 +366,6 @@ footer>div{
         width: 230px;
     }
 
-    #welcometitle,
-    #welcometext, 
-    .searchbar, 
-    .searchmenu{
-        left: 5.2%;
-    }
 
 
     .mycard {
