@@ -416,15 +416,21 @@ hr {
 
 @media only screen and (max-width: 800px) {
 
+    .header {
+        width: 100%;
+    }
+
     .attrinfo {
+        position: relative;
+        top: -28px;
         display: grid;
         grid-template-columns: 100%;
-        margin: 0px;
         justify-content: center;
 
         /* 邊邊無空隙 */
         margin: 0;
         padding: 0;
+        padding-top: -100px;
     }
 
     .card {
@@ -454,7 +460,7 @@ hr {
 
     .maininfo {
         display: grid;
-        grid-template-columns: 90%;
+        grid-template-columns: 98%;
         padding: 10px;
         justify-content: center;
     }
@@ -468,7 +474,7 @@ hr {
         position: relative;
         top: 800px;
         padding: 10px;
-        max-width: 90%;
+        max-width: 98%;
     }
 
 }
