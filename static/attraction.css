@@ -1,0 +1,474 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
+
+
+body {
+    font-family: 'Noto Sans TC', '微軟正黑體', sans-serif;
+    margin: 0px;
+}
+
+.taipei {
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 34px;
+    color: #448899;
+    text-decoration: none;
+}
+
+.c1 {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 34px;
+    color: #666666;
+    text-decoration: none;
+}
+
+.nav-container {
+    background-color: #FFFFFF;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+
+}
+
+.header {
+    /* 最寬1200px */
+    width: min(90%, 1200px);
+    height: 50px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+}
+
+footer {
+    position: relative;
+    bottom: -800px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px;
+    background: #757575;
+}
+
+footer>div {
+
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 13px;
+    color: #FFFFFF;
+
+}
+
+/* 輪播開始------------------------------------------------------------------ */
+
+* {
+    box-sizing: border-box
+}
+
+/* Slideshow container */
+.slideshow-container {
+    /* max-width: 1000px; */
+    position: relative;
+    margin: auto;
+}
+
+/* Hide the images by default */
+.mySlides {
+    display: none;
+}
+
+.mySlides>img {
+    height: 406px;
+    width: 100%;
+    border-radius: 5px;
+}
+
+/* Next & previous buttons */
+.prev,
+.next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    height: auto;
+    margin-top: -40px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-bottom: 2px;
+    padding-left: 13px;
+    padding-right: 16px;
+    color: #666666;
+    background-color: rgba(201, 201, 201, 0.636);
+    font-weight: 300;
+    font-size: 30px;
+    transition: 0.6s ease;
+    border-radius: 500px;
+    user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+    right: 0;
+    /* border-radius: 30px; */
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+    background-color: rgba(201, 201, 201, 0.875);
+}
+
+/* The dots/bullets/indicators */
+.dot {
+
+    position: relative;
+    bottom: 35px;
+
+    cursor: pointer;
+    height: 12px;
+    width: 12px;
+    margin: 0 5px;
+    background-color: #FFFFFF;
+    border-radius: 50%;
+    border-color: #FFFFFF;
+    box-sizing: 1px;
+    border-style: solid;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+.active,
+.dot:hover {
+    background-color: black;
+}
+
+/* Fading animation */
+.fade {
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+@keyframes fade {
+    from {
+        opacity: .4
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+/* 輪播結束------------------------------------------------------------------ */
+
+/* radio按鈕------------------------------------------------------------------ */
+.radio {
+    /* 原始的radio藏在下面 */
+    position: relative;
+    top: 0px
+}
+
+/* Create a custom radio button */
+.checkmark {
+    position: absolute;
+    top: 2px;
+    left: 0;
+    height: 22px;
+    width: 22px;
+    background-color: #FFFFFF;
+    border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.radio:hover input~.checkmark {
+    background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.radio input:checked~.checkmark {
+    background-color: #FFFFFF;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.radio input:checked~.checkmark:after {
+    display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.radio .checkmark:after {
+    top: 2px;
+    left: 2px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #448899;
+}
+
+/* radio結束------------------------------------------------------------------ */
+
+
+hr {
+    color: #E8E8E8;
+    border: none;
+    border-bottom: solid;
+    border-width: 1px;
+}
+
+.hr {
+    position: relative;
+    top: 0px;
+
+    color: #E8E8E8;
+    border: none;
+    border-bottom: solid;
+    border-width: 1px;
+}
+
+.container {
+    max-width: 1200px;
+    background-color: #FFFFFF;
+    margin: auto;
+    /* 置中 */
+}
+
+.attrinfo {
+    height: 34px;
+    padding: 10px;
+    min-width: 100%;
+    display: grid;
+    grid-template-columns: 46% 52%;
+    gap: 30px;
+    padding: 10px;
+}
+
+.infopic {
+    top: 20px;
+    position: relative;
+
+}
+
+.maininfo {
+    top: 20px;
+    position: relative;
+
+}
+
+.infoname {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 24px;
+    color: #666666;
+
+    display: flex;
+    align-items: center;
+}
+
+.infodetail {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 13px;
+    color: #666666;
+
+    display: flex;
+    align-items: center;
+}
+
+.booking {
+    background-color: #E8E8E8;
+    height: 323px;
+    width: 600px;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.btitle {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 30px;
+    color: #666666;
+}
+
+.content {
+    font-weight: 500;
+    font-size: 16px;
+    color: #666666;
+}
+
+.boption {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 30px;
+    color: #666666;
+}
+
+.bookingbtn {
+    /* 距離邊邊大小 */
+    padding: 10px;
+    width: 154px;
+    height: 36px;
+    background-color: #448899;
+    border-style: none;
+    border-radius: 5px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 16px;
+    color: #FFFFFF;
+    align-items: center;
+    text-align: center;
+}
+
+.bookingbtn:hover {
+    background-color: #448899d0;
+}
+
+#booking_date {
+    padding: 10px;
+    border-style: none;
+    width: 193px;
+    height: 35px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 13px;
+}
+
+.detail {
+    position: relative;
+    top: 450px;
+
+    max-width: 1180px;
+    margin: auto;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 30px;
+    color: #666666;
+}
+
+.dtitle {
+    font-weight: 700;
+}
+
+
+@media only screen and (max-width: 1200px) {
+
+    .attrinfo {
+        height: 34px;
+        min-width: 100%;
+        display: grid;
+        grid-template-columns: 52% 45%;
+        gap: 30px;
+    }
+
+    .card {
+        position: relative;
+        width: 90%;
+        height: 430px;
+        object-fit: cover;
+        float: right;
+    }
+
+
+    .mySlides>img {
+        width: 100%;
+        height: 433px;
+        object-fit: cover;
+        border-radius: 5px;
+    }
+
+    /* --------------------------------------------------- */
+
+    .hr {
+        position: relative;
+        top: 0px;
+        color: #E8E8E8;
+        border: none;
+        border-bottom: solid;
+        border-width: 1px;
+    }
+
+    .booking {
+        width: 90%;
+        height: 350px;
+    }
+
+    #booking_date {
+        width: 175px;
+    }
+
+    .detail {
+        position: relative;
+        top: 450px;
+        padding: 10px;
+        max-width: 90%;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+
+    .attrinfo {
+        display: grid;
+        grid-template-columns: 100%;
+        margin: 0px;
+        justify-content: center;
+
+        /* 邊邊無空隙 */
+        margin: 0;
+        padding: 0;
+    }
+
+    .card {
+        position: relative;
+        width: 100%;
+        height: 350px;
+        object-fit: cover;
+    }
+
+    .mySlides>img {
+        width: 100%;
+        height: 350px;
+        object-fit: cover;
+        border-radius: 0px;
+    }
+
+    /* --------------------------------------------------- */
+
+    .hr {
+        position: relative;
+        top: 0px;
+        color: #E8E8E8;
+        border: none;
+        border-bottom: solid;
+        border-width: 1px;
+    }
+
+    .maininfo {
+        display: grid;
+        grid-template-columns: 90%;
+        padding: 10px;
+        justify-content: center;
+    }
+
+    .booking {
+        width: 100%;
+        height: 100%;
+    }
+
+    .detail {
+        position: relative;
+        top: 800px;
+        padding: 10px;
+        max-width: 90%;
+    }
+
+}

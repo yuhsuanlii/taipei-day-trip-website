@@ -56,11 +56,12 @@ function addDataToDOM(postData) {
     let data = postData.data;
     let main = '';
     for (let i = 0; i <= data.length; i++) {
+        let id = data[i].id;
         let title = data[i].name;
         let mrt = data[i].mrt;
         let category = data[i].category;
         let images = data[i].images[0];
-        main += `<article class="card">
+        main += `<article class="card"><a href="${`${originURL}/attraction/${id}`}">
                     <img class="pic" id="img" src="${images}" alt=""></img>
                     <figcaption class="desc">
                         <span id="info">${title}</span>
@@ -68,7 +69,7 @@ function addDataToDOM(postData) {
                     <div class="">
                         <span class="mrt" id="mrt">${mrt}</span>
                         <span class="cardcategory" id="category">${category}</span>
-                    </div>
+                    </div></a>
                 </article>`
         postElement.innerHTML = main;
         container.appendChild(postElement);
