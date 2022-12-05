@@ -1,16 +1,24 @@
 from flask import *
-import mysql.connector
+from mysql.connector import pooling
 
 app=Flask(__name__)
 app.config["JSON_AS_ASCII"]=False
 app.config["TEMPLATES_AUTO_RELOAD"]=True
 app.config["JSON_SORT_KEYS"]=False
-
 app.config['SECRET_KEY'] = b'\x8f\xef\xa5\xba#8.9\xa5A]\xdd\xc4\x1b\x8d\x0c'
-conn = mysql.connector.connect(host='localhost',user='root',password='rootroot',db='daytrip')
-cur = conn.cursor(buffered=True)
-cur.execute('SET SESSION WAIT_TIMEOUT = 2147483')
 
+def get_connection():
+    connection = pooling.MySQLConnectionPool(
+        pool_name = "python_pool",
+        pool_size = 20,
+        pool_reset_session = True,
+        host = 'localhost',
+        user = 'root',
+        password = 'root',
+        database = 'daytrip'
+        )
+    conn = connection.get_connection()
+    return conn
 
 # API
 @app.route("/api/attractions", methods=["GET"])
@@ -22,15 +30,17 @@ def attractions():
         page = 0
     page_size = 12
     
-    if keyword=="":
-        sql = "SELECT * FROM attraction LIMIT %s, %s"
-        cur.execute(sql,(page*page_size,12))
-    else:
-        sql = "SELECT * FROM attraction WHERE name REGEXP %s OR category= %s LIMIT %s, %s"
-        cur.execute(sql,(str(keyword),str(keyword),page*page_size,12))
-    record = cur.fetchall()
-    
     try:
+        conn = get_connection()
+        cur = conn.cursor()
+        if keyword=="":
+            sql = "SELECT * FROM attraction LIMIT %s, %s"
+            cur.execute(sql,(page*page_size,12))
+        else:
+            sql = "SELECT * FROM attraction WHERE name REGEXP %s OR category= %s LIMIT %s, %s"
+            cur.execute(sql,(str(keyword),str(keyword),page*page_size,12))
+        record = cur.fetchall()
+    
         if len(record)>0:
             result = []
             for i in range(len(record)):
@@ -67,9 +77,15 @@ def attractions():
         response = app.response_class(response=json.dumps(fail),
                                     status=500, content_type='application/json')
         return response
+    finally:
+        cur.close()
+        conn.close()
+
 
 @app.route("/api/attraction/<attractionId>", methods=['GET'])
 def attractionId(attractionId):
+    conn = get_connection()
+    cur = conn.cursor()
     sql = "SELECT * FROM attraction WHERE id = %s"
     id = (str(attractionId),)
     cur.execute(sql,id)
@@ -103,9 +119,14 @@ def attractionId(attractionId):
         response = app.response_class(response=json.dumps(fail),
                                     status=500, content_type='application/json')
         return response
+    finally:
+        cur.close()
+        conn.close()
 
 @app.route("/api/categories", methods=['GET'])
 def categories():
+    conn = get_connection()
+    cur = conn.cursor()
     sql = "SELECT category FROM attraction"
     cur.execute(sql)
     data = cur.fetchall()
@@ -114,7 +135,6 @@ def categories():
         for i in list(set(data)):
             res = "".join(i)
             json_data.append(res)
-        print(json_data)
         return make_response(jsonify(data = json_data),200,
                             {'ContentType':'application/json'})    
     except Exception as e:
@@ -123,7 +143,9 @@ def categories():
         response = app.response_class(response=json.dumps(fail),
                                     status=500, content_type='application/json')
         return response
-
+    finally:
+        cur.close()
+        conn.close()
 
 # Pages
 @app.route("/")
