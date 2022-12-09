@@ -17,7 +17,7 @@ def get_connection():
         pool_reset_session = True,
         host = 'localhost',
         user = 'root',
-        password = 'root',
+        password = 'rootroot',
         database = 'daytrip'
         )
     conn = connection.get_connection()
