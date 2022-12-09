@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Taipei Day Trip</title>
     <link rel="stylesheet" href="/static/index.css">
+    <link rel="stylesheet" href="/static/login.css">
 </head>
 
 <body>
@@ -14,9 +15,10 @@
     <div class="nav-container">
         <nav class="header">
             <div><a href="/" class="taipei">台北一日遊</a></div>
-            <div>
-                <span><a class="c1" href="">預定行程</a>&emsp;</span>
-                <span><a class="c1" href="">登入/註冊</a></span>
+            <div class="header_menu">
+                <span><a class="" href="#" style="text-decoration: none;">預定行程</a>&emsp;</span>
+                <span><a class="header_login show" style="text-decoration: none;">登入/註冊</a></span>
+                <span><a class="header_logout show" style="text-decoration: none;">登出系統</a></span>
             </div>
         </nav>
     </div>
@@ -36,10 +38,69 @@
         </div>
     </div>
 
+    <!-- login -->
+
+    <div class="login">
+        <!-- 登入 -->
+        <div class="login_wrapper login_fadeInDown show">
+            <div class="decobar"></div>
+            <div id="formContent">
+                <!-- Tabs Titles -->
+                <h2 class="login_active">登入會員帳號</h2>
+                <a class="icon_close"><img src="/static/img/icon_close.png" alt=""></a>
+
+                <!-- Login Form -->
+                <form id="loginform">
+                    <input type="text" id="email" class="fadeIn first" name="email" placeholder="輸入電子信箱"
+                        autocomplete="off" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+                    <input type="password" id="password" class="fadeIn second" name="password" placeholder="輸入密碼"
+                        autocomplete="off" pattern="[a-zA-Z0-9]{4,}" required>
+                    <input type="button" class="fadeIn third" value="登入帳戶" id="loginbutton">
+                    <div class="login_message"></div>
+                </form>
+
+                <!-- Remind Passowrd -->
+                <div id="formFooter">
+                    <span>還沒有帳戶？ </span><a class="underlineHover" id="clicktosign">點此註冊</a>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- 註冊 -->
+        <div class="signup_wrapper login_fadeInDown show">
+            <div class="decobar"></div>
+            <div id="formContent">
+                <!-- Titles -->
+                <h2 class="login_active">註冊會員帳號</h2>
+                <a class="icon_close2"><img src="/static/img/icon_close.png" alt=""></a>
+
+                <!-- Signup Form -->
+                <form id="signupform">
+                    <input type="text" id="sname" class="fadeIn first" name="sname" placeholder="輸入姓名"
+                        autocomplete="off" required>
+                    <input type="text" id="semail" class="fadeIn second" name="semail" placeholder="輸入電子郵件"
+                        autocomplete="off" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+                    <input type="password" id="spassword" class="fadeIn third" name="spassword" placeholder="輸入密碼"
+                        autocomplete="off" pattern="[a-zA-Z0-9]{4,12}" required>
+                    <input type="button" class="fadeIn fourth" value="註冊新帳戶" id="signupbutton">
+                    <div class="signup_message"></div>
+                </form>
+
+                <!-- Remind Passowrd -->
+                <div id="formFooter">
+                    <span>已經有帳戶了？ </span><a class="underlineHover" id="clicktologin">點此登入</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="mask show"></div>
+
     <!-- main -->
     <section class="container" id="container">
     </section>
- 
+
     <!-- footer -->
     <footer class="footer">
         <div>COPYRIGHT © 2022 台北一日遊</div>
@@ -47,6 +108,7 @@
 
     <!-- JS -->
     <script src="/static/index.js"></script>
-
+    <script src="/static/login.js"></script>
 </body>
+
 </html>

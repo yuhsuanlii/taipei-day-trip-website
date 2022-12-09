@@ -1,5 +1,8 @@
 from flask import *
 from mysql.connector import pooling
+import re
+import jwt
+from flask_bcrypt import generate_password_hash, check_password_hash
 
 app=Flask(__name__)
 app.config["JSON_AS_ASCII"]=False
@@ -20,7 +23,7 @@ def get_connection():
     conn = connection.get_connection()
     return conn
 
-# API
+# Attractions API
 @app.route("/api/attractions", methods=["GET"])
 def attractions():
     keyword = request.args.get("keyword", "")
@@ -123,6 +126,7 @@ def attractionId(attractionId):
         cur.close()
         conn.close()
 
+
 @app.route("/api/categories", methods=['GET'])
 def categories():
     conn = get_connection()
@@ -146,6 +150,122 @@ def categories():
     finally:
         cur.close()
         conn.close()
+
+
+# User API
+@app.route("/api/user", methods=['POST'])
+def post_user():
+    name=request.json["name"]
+    email=request.json["email"]
+    password=request.json["password"]
+    email_check = re.match("^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$", email)
+    password_check = re.match("[a-zA-Z0-9]{4,12}", password) # 4-12英數字
+
+    if name == None or email_check == None or password_check == None:
+        response = jsonify({"error": True,"message": "資料格式錯誤"})
+        response.status_code = "400"
+        return response
+    try:
+        conn = get_connection()
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM user WHERE email = %s",[email])
+        result = cur.fetchone()
+        # print(result)
+        if not result == None:
+            response = jsonify({"error": True,"message": "Email已重覆註冊"})
+            response.status_code = "400"
+            return response
+        # if result == None:
+        hash_password = generate_password_hash(password).decode('utf-8')
+        cur.execute("INSERT INTO user (name, email, password) VALUES (%s, %s, %s)", [name, email, hash_password])
+        conn.commit()
+        response = jsonify({"ok":True})
+        return response
+
+    except Exception as e:
+        print(e)
+        fail = {"error": True,"message": "伺服器內部錯誤"}
+        response = app.response_class(response=json.dumps(fail),
+                                    status=500, content_type='application/json')
+        return response
+    
+    finally:
+        cur.close()
+        conn.close()
+
+
+@app.route("/api/user/auth", methods=['PUT'])
+def put_user():
+    email=request.json["email"]
+    password=request.json["password"]
+    email_check = re.match("^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$", email)
+    password_check = re.match("[a-zA-Z0-9]{4,12}", password) # 4-12英數字
+    if  email_check == None or password_check == None:
+        response = jsonify({
+            "error": True,
+            "message": "無此帳號"
+        })
+        response.status_code = "400"
+        return response
+    try:
+        conn = get_connection()
+        cur = conn.cursor(dictionary = True)
+        cur.execute("SELECT id, name, email, password FROM user WHERE email = %s",[email])
+        result = cur.fetchone()
+        if result == None:
+            response = jsonify({
+                "error": True,
+                "message": "電子信箱或密碼輸入錯誤"
+            })
+            response.status_code = "400"
+            return response
+        hash_password_check = check_password_hash(result["password"], password)
+        if hash_password_check == False:
+            response = jsonify({
+                "error": True,
+                "message": "電子信箱或密碼輸入錯誤"
+            })
+            response.status_code = "400"
+            return response
+        JWT_data = {
+            "id": result["id"],
+            "name": result["name"],
+            "email": result["email"]
+        }
+        encoded_jwt = jwt.encode(JWT_data, 'secret_key', algorithm="HS256")
+        response = make_response(jsonify({"ok": True}))
+        print(encoded_jwt)
+        response.set_cookie(key = "token", value = encoded_jwt, max_age = 604800) #7天
+        return response
+    except Exception as e:
+        print(e)
+        fail = {"error": True,"message": "伺服器內部錯誤"}
+        response = app.response_class(response=json.dumps(fail),
+                                    status=500, content_type='application/json')
+        return response
+    finally:
+        cur.close()
+        conn.close()
+
+
+@app.route("/api/user/auth", methods=['GET'])
+def get_user():
+    JWT_cookies = request.cookies.get("token")
+    if JWT_cookies == None:
+        response = jsonify({"data": None})
+        return response
+    decoded_jwt = jwt.decode(JWT_cookies, 'secret_key', algorithms="HS256")
+    response = jsonify({"data":decoded_jwt})
+    return response
+
+
+@app.route("/api/user/auth", methods=['DELETE'])
+def delete_user():
+    response = make_response(jsonify({"ok": True}))
+    response.delete_cookie("token")
+    return response
+
+
 
 # Pages
 @app.route("/")
