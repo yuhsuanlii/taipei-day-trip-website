@@ -1,15 +1,15 @@
 @import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
 
-body{
+body {
     font-family: 'Noto Sans TC', '微軟正黑體', sans-serif;
     margin: 0px;
 }
 
-a{
+a {
     font-weight: 700;
     font-size: 16px;
     line-height: 13px;
-    color: #757575;  
+    color: #757575;
 }
 
 .pic {
@@ -22,7 +22,7 @@ a{
     text-align: center;
 }
 
-#welcometitle{
+#welcometitle {
     position: absolute;
     top: 150px;
     font-weight: 700;
@@ -31,7 +31,7 @@ a{
     color: #F8F8F8;
 }
 
-#welcometext{
+#welcometext {
     position: absolute;
     top: 190px;
     font-weight: 700;
@@ -41,14 +41,14 @@ a{
 
 }
 
-.searchbar{
+.searchbar {
     position: absolute;
     top: 220px;
-  
+
 }
 
 
-#search{
+#search {
 
 
     float: left;
@@ -64,7 +64,7 @@ a{
     outline: none;
 }
 
-#searchbtn{
+#searchbtn {
     float: right;
     position: absolute;
     width: 60px;
@@ -78,7 +78,7 @@ a{
     background-repeat: no-repeat;
 }
 
-.searchmenu{
+.searchmenu {
     height: 125px;
     display: grid;
     gap: 3px;
@@ -96,13 +96,13 @@ a{
 .show.searchmenu {
     visibility: hidden;
     opacity: 0;
-  }
+}
 
-.category:hover{
+.category:hover {
     background-color: #E8E8E8;
 }
 
-.category{
+.category {
 
     padding: 10px;
     line-height: 50%;
@@ -122,7 +122,7 @@ a{
     margin: auto;
 }
 
-#welcomepic{
+#welcomepic {
     object-fit: cover;
     height: 320px;
     width: 100%;
@@ -131,35 +131,37 @@ a{
 
 
 
-.taipei{
+.taipei {
     font-weight: 700;
     font-size: 30px;
     line-height: 34px;
     color: #448899;
     text-decoration: none;
 }
-.c1{
+
+.header_menu {
     font-style: normal;
     font-weight: 500;
     font-size: 16px;
     line-height: 34px;
     color: #666666;
-    text-decoration: none;
+    /* text-decoration: none; */
 }
 
-.nav-container{
+.nav-container {
     background-color: #FFFFFF;
     position: fixed;
     width: 100%;
     top: 0;
-    z-index: 100;
-    
+    z-index: 10;
+    justify-content: flex-end;
+    flex: auto;
+
 }
 
-.header{
-
+.header {
     /* 最寬1200px */
-    width: min(90%, 1200px); 
+    width: min(90%, 1200px);
     height: 34px;
     padding: 10px;
     display: flex;
@@ -167,25 +169,30 @@ a{
     margin: auto;
 }
 
-.desc>#info{
+.header_login,
+.header_logout {
+    cursor: pointer;
+}
+
+.desc>#info {
     position: relative;
     padding: 10px;
     font-weight: 700;
     font-size: 16px;
     line-height: 20px;
-    color: #FFFFFF; 
+    color: #FFFFFF;
     float: left;
 }
 
-.mrt{
+.mrt {
     padding: 10px;
-    line-height:50%;
+    line-height: 50%;
     float: left;
     position: relative;
     font-size: 16px;
 }
 
-.cardcategory{
+.cardcategory {
 
     padding: 10px;
     line-height: 50%;
@@ -197,7 +204,7 @@ a{
 
 
 
-footer{
+footer {
 
     display: flex;
     flex-direction: column;
@@ -205,23 +212,24 @@ footer{
     padding: 40px;
     background: #757575;
 }
-footer>div{
+
+footer>div {
 
     font-weight: 700;
     font-size: 16px;
     line-height: 13px;
     color: #FFFFFF;
-    
+
 }
 
 .noattr {
     line-height: 300px;
     width: 200px;
-    display:block; 
-    margin:auto;
+    display: block;
+    margin: auto;
     background-size: cover;
-  }
-  
+}
+
 
 
 
@@ -230,12 +238,12 @@ footer>div{
 @media only screen and (min-width: 1201px) {
 
 
-    .searchmenu{
+    .searchmenu {
         grid-template-columns: 120px 120px 120px;
         width: 396px;
     }
 
-    #search{
+    #search {
         width: 380px;
     }
 
@@ -247,26 +255,26 @@ footer>div{
         border-top-width: 0px;
         border-left-width: 0px;
         border-right-width: 0px;
-        border-bottom-width:30px;
-        border-style:solid;
+        border-bottom-width: 30px;
+        border-style: solid;
 
         width: 100%;
         display: grid;
         grid-template-columns: 277px 277px 277px 277px;
         place-content: center;
         gap: 30px;
-     
+
     }
 
 
     .desc {
-        position:absolute ;
+        position: absolute;
         bottom: 45px;
         color: #FFFFFF;
-        background-color:#0000007e;
+        background-color: #0000007e;
         /* opacity: 0.6; */
         width: 270px;
-       
+
     }
 
     .card {
@@ -278,7 +286,7 @@ footer>div{
         border-radius: 5px;
         border-style: solid;
         border-color: #e6e6e689;
-        
+
     }
 
 
@@ -297,12 +305,16 @@ footer>div{
 
 @media only screen and (max-width: 1200px) {
 
-    .searchmenu{
+    .header {
+        width: 96%;
+    }
+
+    .searchmenu {
         grid-template-columns: 120px 120px 120px;
         width: 396px;
     }
 
-    #search{
+    #search {
         width: 380px;
     }
 
@@ -314,29 +326,29 @@ footer>div{
         border-top-width: 0px;
         border-left-width: 0px;
         border-right-width: 0px;
-        border-bottom-width:30px;
-        border-style:solid;
+        border-bottom-width: 30px;
+        border-style: solid;
 
         width: 100%;
         display: grid;
         /* 方塊大小 */
         grid-template-columns: 45% 45%;
         /* 置中間距 */
-        place-content: center; 
+        place-content: center;
         gap: 30px;
-        
+
     }
 
 
 
     .desc {
-        position:absolute ;
+        position: absolute;
         bottom: 45px;
         color: #FFFFFF;
-        background-color:#0000007e;
+        background-color: #0000007e;
         /* opacity: 0.1; */
         width: 100%;
-        
+
     }
 
     .card {
@@ -364,12 +376,16 @@ footer>div{
 
 @media only screen and (max-width: 600px) {
 
-    .searchmenu{
+    .header {
+        width: 96%;
+    }
+
+    .searchmenu {
         grid-template-columns: 102px 102px 102px;
         width: 321px;
     }
 
-    #search{
+    #search {
         width: 230px;
     }
 
@@ -381,25 +397,25 @@ footer>div{
         border-top-width: 0px;
         border-left-width: 0px;
         border-right-width: 0px;
-        border-bottom-width:30px;
-        border-style:solid;
+        border-bottom-width: 30px;
+        border-style: solid;
 
         width: 100%;
         display: grid;
         grid-template-columns: 90%;
         place-content: center;
         gap: 30px;
-        
+
     }
 
     .desc {
-        position:absolute ;
+        position: absolute;
         bottom: 45px;
         color: #FFFFFF;
-        background-color:#0000007e;
+        background-color: #0000007e;
         /* opacity: 0.6; */
         width: 100%;
-        
+
     }
 
 

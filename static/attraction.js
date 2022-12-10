@@ -43,7 +43,7 @@ fetch(`${originURL}/api/attraction/${id}`
     allpic(data);
     alldot(data);
 
-    console.log(data.data)
+    // console.log(data.data)
 
     infoname.innerHTML = data.data.name
     category.innerHTML = data.data.category
@@ -69,7 +69,7 @@ function alldot(data) {
     }
 }
 
- 
+
 function allpic(data) {
 
     let card = document.getElementById("card");
@@ -77,12 +77,12 @@ function allpic(data) {
 
     let main1 = '';
     for (let i = 0; i <= data.data.images.length - 1; i++) {
-        console.log(data.data.images[i]);
+        // console.log(data.data.images[i]);
         let images = data.data.images[i]
-        
-        if (i==0){
+
+        if (i == 0) {
             main1 += `<div class="mySlides fade" style="display:flex;"><img src="${images}"></div>`
-        }else{
+        } else {
             main1 += `<div class="mySlides fade"><img src="${images}"></div>`
         }
 

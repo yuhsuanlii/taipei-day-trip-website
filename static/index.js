@@ -1,9 +1,11 @@
 
 let originURL = window.location.origin;
-console.log(window.location.origin)
 let search = document.querySelector("#search");
 let container = document.getElementById('container');
 let searchmenu = document.querySelector("#searchmenu");
+let searchbtn = document.querySelector("#searchbtn");
+let welcomepic = document.querySelector("#welcomepic");
+let navcontainer = document.querySelector(".nav-container");
 
 // 點擊"搜尋欄"，跳出"選單"
 // 選單內串接 category API
@@ -35,6 +37,19 @@ search.addEventListener("click", function show() {
     searchmenu.classList.toggle("show");
 });
 
+// 按其他地方隱藏選單
+searchbtn.addEventListener("click", function show() {
+    searchmenu.classList.add("show");
+});
+container.addEventListener("click", function show() {
+    searchmenu.classList.add("show");
+});
+welcomepic.addEventListener("click", function show() {
+    searchmenu.classList.add("show");
+});
+navcontainer.addEventListener("click", function show() {
+    searchmenu.classList.add("show");
+});
 
 let keyword = "";
 let currentPage = 0;
