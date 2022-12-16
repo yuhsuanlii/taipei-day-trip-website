@@ -13,8 +13,6 @@ window.onload = function checkSigninStatus() {
       let result = data.data;
       if (result != null) {
         bname.textContent = result.name;
-        // contactName.value = memberName;
-        // contactEmail.value = memberEmail;
         header_logout.classList.remove("show");
         header_login.remove();
         getData();
@@ -136,7 +134,6 @@ function myBooking(result) {
 
 }
 
-// 無待預訂的行程
 function noBooking() {
   const noBook = document.createElement("div");
   noBook.innerHTML = `<div class="nobooking">
