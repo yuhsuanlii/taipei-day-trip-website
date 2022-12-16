@@ -1,0 +1,366 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
+
+
+
+.show.main,
+.show.fakefooter {
+    visibility: hidden;
+    opacity: 0;
+}
+
+body {
+    font-family: 'Noto Sans TC', '微軟正黑體', sans-serif;
+    margin: 0px;
+}
+
+.taipei {
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 34px;
+    color: #448899;
+    text-decoration: none;
+}
+
+.header_menu {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 40px;
+    color: #666666;
+    /* text-decoration: none; */
+}
+
+.nav-container {
+    background-color: #FFFFFF;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 10;
+    justify-content: flex-end;
+    flex: auto;
+    border-bottom: #E8E8E8 1px solid;
+}
+
+.header {
+    /* 最寬1200px */
+    width: min(90%, 1200px);
+    height: 40px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+}
+
+.header_login,
+.header_logout {
+    cursor: pointer;
+}
+
+footer {
+    position: relative;
+    bottom: -100px;
+    width: min(90%, );
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px;
+    background: #757575;
+}
+
+footer>div {
+
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 13px;
+    color: #FFFFFF;
+
+}
+
+
+.container {
+    width: 1200px;
+    background-color: #FFFFFF;
+    margin: auto;
+    position: relative;
+    top: 60px;
+
+    /* 置中 */
+}
+
+
+/* booking */
+
+.bookingperson {
+    /* min-width: 100%; */
+    display: grid;
+    grid-template-columns: 10% 80% 10%;
+    padding-top: 46px;
+    padding-bottom: 35px;
+    font-size: 19px;
+    font-weight: 700;
+    color: #666666;
+}
+
+.bookinglist {
+    height: 240px;
+    /* min-width: 100%; */
+    display: grid;
+    grid-template-columns: 10% 25% 55% 10%;
+    border-bottom: #E8E8E8 1px solid;
+}
+
+.bookingpic {
+    top: 0px;
+    position: relative;
+    width: 266px;
+    height: 200px;
+}
+
+.bookingpic>img {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    float: right;
+}
+
+
+.bookingtitle {
+    font-size: 16px;
+    font-weight: 700;
+    color: #448899;
+    line-height: 30px;
+}
+
+.bookingdetail {
+    font-size: 16px;
+    font-weight: 500;
+    color: #666666;
+    line-height: 20px;
+}
+
+.bookingcontact{
+    display: grid;
+    grid-template-columns: 10% 80% 10%;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    /* font-size: 19px;
+    font-weight: 700;
+    color: #666666; */
+    border-bottom: #E8E8E8 1px solid;
+}
+
+.bnotice1{
+    font-weight: 700;
+    font-size: 19px;
+    line-height: 16px;
+    color: #666666;
+    padding-bottom: 10px;
+}
+
+.bnotice2{
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    color: #666666;
+}
+
+.btitle {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 13px;
+    color: #666666;
+    padding-bottom: 15px;
+}
+
+.binput{
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 13px;
+    width: 200px;
+    padding: 10px;
+    border: #E8E8E8 1px solid;
+    border-radius: 5px;
+    color: #757575;
+}
+
+
+.binput:focus{
+    /* background-color: #f6f6f6; */
+    border-bottom: 2px solid #448899;
+    outline: none;
+    /* 去邊框 */
+}
+
+
+/* 隱藏number上下箭頭 */
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.bookingbottom{
+    display: grid;
+    grid-template-columns: 10% 80% 10%;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.bookingbutton{
+    text-align: right;
+}
+
+.bbutton{
+    font-size: 19px;
+    font-weight: 400;
+    line-height: 16px;
+    align-items: center;
+    color: #FFFFFF;
+    width: 173px;
+    height: 36px;
+    background-color: #448899;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.bbutton:hover{
+    background-color: #4488999c;
+}
+
+.nobooking{
+    display: grid;
+    grid-template-columns: 10% 80% 10%;
+    /* padding-bottom: 500px; */
+}
+
+.fakefooter{
+    height: 72vh;
+    position: relative;
+    top: 100px;
+    background-color: #757575;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: min(90%, );
+}
+
+
+@media only screen and (max-width: 1200px) {
+    .container{
+        width: 90%;
+    }
+    .bookinglist {
+        grid-template-columns: 10% 30% 50% 10%;
+    }
+}
+
+@media only screen and (max-width: 1100px) {
+    
+    .container{
+        width: 90%;
+    }
+    .bookinglist {
+        grid-template-columns: 10% 32% 48% 10%;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+
+    .container{
+        width: 90%;
+    }
+    .bookinglist {
+        grid-template-columns: 10% 35% 45% 10%;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+
+    .container{
+        width: 93%;
+    }
+    .bookinglist {
+        grid-template-columns: 5% 40% 50% 5%;
+    }
+
+    .bookingperson,
+    .bookingcontact,
+    .bookingbottom,
+    .nobooking{
+        grid-template-columns: 5% 90% 5%;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+
+    .container{
+        width: 93%;
+    }
+
+    .bookinglist {   
+        grid-template-columns: 5% 45% 45% 5%;
+    }
+
+    .bookingperson,
+    .bookingcontact,
+    .bookingbottom,
+    .nobooking{
+        grid-template-columns: 5% 90% 5%;
+    }
+}
+
+
+@media only screen and (max-width: 700px) {
+
+    .header{
+        width: 95%;
+    }
+
+    .container{
+        width: 95%;
+    }
+    .bookingperson{
+        padding-bottom: 17px;
+    }
+
+
+    .bookinglist {
+        height: 495px;
+        display: grid;
+        grid-template-columns: 100%;
+    }
+
+    .bookingpic {
+        top: 0px;
+        position: relative;
+        width: 100%;
+        height: 200px;
+    }
+    
+    .bookingpic>img {
+        position: relative;
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        float: right;
+    }
+
+    .maininfo{
+        height: 180px;
+    }
+
+    .bookingdelete{
+        text-align: right;
+    }
+
+    .bookingperson,
+    .bookingcontact,
+    .bookingbottom,
+    .nobooking{
+        grid-template-columns: 0% 100% 0%;
+    }
+
+}

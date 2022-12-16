@@ -16,7 +16,7 @@
         <nav class="header">
             <div><a href="/" class="taipei">台北一日遊</a></div>
             <div class="header_menu">
-                <span><a class="" href="" style="text-decoration: none; color: #666666;">預定行程</a>&emsp;</span>
+                <span><a class="header_booking" style="text-decoration: none; color: #666666;">預定行程</a>&emsp;</span>
                 <span><a class="header_login show" style="text-decoration: none;">登入/註冊</a></span>
                 <span><a class="header_logout show" style="text-decoration: none;">登出系統</a></span>
             </div>
@@ -120,8 +120,7 @@
                     <span class="btitle">訂購導覽行程</span>
                     <p class="boption">以此景點為中心的一日行程，帶您探索城市角落故事</p>
                     <p class="btitle">選擇日期：
-                        <input id="booking_date" type="date" name="booking_date" placeholder="yyyy/mm/dd"
-                            pattern="\d{4}-\d{2}-\d{2}" required />
+                        <input class="booking_date" id="booking_date" type="date"/>
                     </p>
                     <p class="btitle">選擇時間：
                         <label class="radio">
@@ -141,7 +140,8 @@
                     <p class="btitle">導覽費用：
                         <span class="content" id="field-price"></span>
                     </p>
-                    <button class="bookingbtn">開始預約行程</button>
+                    <button class="bookingbtn" id="bookingbtn" onclick="book()">開始預約行程</button>
+                    <label class="booking-text show">請選擇預約日期</label>
                 </div>
             </div>
         </div>

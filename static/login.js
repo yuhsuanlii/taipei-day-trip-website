@@ -12,7 +12,43 @@ let login_message = document.querySelector(".login_message");
 let pathname = location.pathname;
 let loginform = document.querySelector("#loginform");
 let signupform = document.querySelector("#signupform");
+let header_booking = document.querySelector(".header_booking");
 
+// header預訂行程
+header_booking.addEventListener("click", () => {
+    fetch(`${originURL}/api/user/auth`)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            let result = data.data;
+            if (result != null) {
+                console.log("已登入")
+                document.location.href = "/booking";
+            } else {
+                login_wrapper.classList.toggle("show");
+                mask.classList.toggle("show")
+            }
+        });
+});
+
+// 網頁載入時，確認登入狀態
+window.onload = function checkSigninStatus() {
+    fetch(`${originURL}/api/user/auth`)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            let result = data.data;
+            if (result != null) {
+                header_logout.classList.remove("show");
+                header_login.remove();
+            } else {
+                header_login.classList.remove("show");
+                header_logout.remove();
+            }
+        });
+}
 
 
 // classList.toggle 重複新增又移除
@@ -64,28 +100,9 @@ signupform.addEventListener("click", () => {
 
 // ------------------------------------------------------------------------
 
-// 網頁載入時，確認登入狀態
-window.onload = function checkSigninStatus() {
-    fetch(`${originURL}/api/user/auth`)
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (data) {
-            let result = data.data;
-            if (result != null) {
-                header_logout.classList.remove("show");
-                header_login.remove();
-            } else {
-                header_login.classList.remove("show");
-                header_logout.remove();
-            }
-        });
-}
-
 
 
 let loginButton = document.querySelector("#loginbutton");
-
 
 loginButton.addEventListener("click", function () {
     let email = document.querySelector("#email").value;
@@ -113,7 +130,6 @@ loginButton.addEventListener("click", function () {
             console.log("error", error);
         });
 });
-
 
 
 // ---------------------------------------------------------------------------------
