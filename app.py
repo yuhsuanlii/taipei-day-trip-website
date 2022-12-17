@@ -278,7 +278,7 @@ def post_booking():
     # 如果cookie沒有token
     JWT_cookies = request.cookies.get("token")       
     if JWT_cookies == None:
-        response = jsonify({"error": True,"message": "未登入系統，拒絕存取"})
+        response = jsonify({"error": True,"message": "請先登入系統"})
         response.status_code = "403"
         return response
     if  date == "":
@@ -318,7 +318,7 @@ def post_booking():
 def get_booking():
     JWT_cookies = request.cookies.get("token")
     if JWT_cookies == None:
-        response = jsonify({"error": True,"message": "未登入系統，拒絕存取"})
+        response = jsonify({"error": True,"message": "請先登入系統"})
         response.status_code = "403"
         return response
     decoded_jwt = jwt.decode(JWT_cookies, 'secret_key', algorithms="HS256")
@@ -364,7 +364,7 @@ def delete_booking():
     JWT_cookies = request.cookies.get("token")
     response = make_response(jsonify({"ok": True}))
     if JWT_cookies == None:
-        response = jsonify({"error": True,"message": "未登入系統，拒絕存取"})
+        response = jsonify({"error": True,"message": "請先登入系統"})
         response.status_code = "403"
         return response
     decoded_jwt = jwt.decode(JWT_cookies, 'secret_key', algorithms="HS256")

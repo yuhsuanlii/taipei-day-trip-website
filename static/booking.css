@@ -222,7 +222,7 @@ input[type=number]::-webkit-inner-spin-button {
     background-color: #448899;
     border: none;
     border-radius: 5px;
-    padding: 10px 20px;
+    padding: 10px 10px;
     cursor: pointer;
 }
 
