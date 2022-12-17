@@ -1,5 +1,3 @@
-
-
 // 導覽費用
 let field_price = document.getElementById("field-price");
 let morning = document.getElementById("morning");
@@ -42,16 +40,13 @@ fetch(`${originURL}/api/attraction/${id}`
 
     allpic(data);
     alldot(data);
-
     // console.log(data.data)
-
     infoname.innerHTML = data.data.name
     category.innerHTML = data.data.category
     mrt.innerHTML = data.data.mrt
     description.innerHTML = data.data.description
     address.innerHTML = data.data.address
     transport.innerHTML = data.data.transport
-
 });
 
 
@@ -125,4 +120,47 @@ function showSlides(n) {
 
 
 // 輪播結束------------------------------------------------------
+
+
+function book(){
+    const booking_date = document.querySelector(".booking_date");
+    const attractionId = location.pathname.replace("/attraction/", "");
+    const date = booking_date.value;
+    const bookTime = document.querySelector("[name=booking-options]:checked").id;
+    const price = bookTime == "morning" ? 2000 : 2500;
+
+    myBooking(attractionId, date, bookTime, price);
+}
+
+async function myBooking(attractionId, date, bookTime, price) {
+
+    try {
+        const response = await fetch(`${originURL}/api/booking`, {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({
+                attractionId: attractionId,
+                date: date,
+                time: bookTime,
+                price: price,
+            }),
+        });
+        if (response.status == 403) {
+            // 後端回復403
+            login_wrapper.classList.toggle("show");
+            mask.classList.toggle("show")
+        }
+        const data = await response.json();
+        if (data.ok) {
+            document.location.href = "/booking";
+        } else if (data.error) {
+            // 按下按鈕但未登入
+            const bookingText = document.querySelector(".booking-text");
+            bookingText.classList.remove("show");
+            bookingText.textContent = data.message;
+        }
+    } catch (error) {
+        console.log("error", error);
+    }
+}
 

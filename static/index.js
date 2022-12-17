@@ -1,4 +1,3 @@
-
 let originURL = window.location.origin;
 let search = document.querySelector("#search");
 let container = document.getElementById('container');
@@ -6,6 +5,7 @@ let searchmenu = document.querySelector("#searchmenu");
 let searchbtn = document.querySelector("#searchbtn");
 let welcomepic = document.querySelector("#welcomepic");
 let navcontainer = document.querySelector(".nav-container");
+
 
 // 點擊"搜尋欄"，跳出"選單"
 // 選單內串接 category API
@@ -69,6 +69,7 @@ function addDataToDOM(postData) {
     postElement.setAttribute("class", "mycard");
     nextPage = postData.nextPage;
     let data = postData.data;
+    // console.log(data);
     let main = '';
     for (let i = 0; i <= data.length; i++) {
         let id = data[i].id;

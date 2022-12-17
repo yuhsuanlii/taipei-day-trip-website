@@ -3,6 +3,7 @@ from mysql.connector import pooling
 import re
 import jwt
 from flask_bcrypt import generate_password_hash, check_password_hash
+from datetime import *
 
 app=Flask(__name__)
 app.config["JSON_AS_ASCII"]=False
@@ -265,6 +266,130 @@ def delete_user():
     response.delete_cookie("token")
     return response
 
+
+# Booking API
+@app.route("/api/booking", methods=['POST'])
+def post_booking():
+    attractionId = request.json["attractionId"]
+    date = request.json["date"]
+    time = request.json["time"]
+    price = request.json["price"]
+
+    # 如果cookie沒有token
+    JWT_cookies = request.cookies.get("token")       
+    if JWT_cookies == None:
+        response = jsonify({"error": True,"message": "請先登入系統"})
+        response.status_code = "403"
+        return response
+    if  date == "":
+        response = jsonify({"error": True,"message": "請選擇預約日期"})
+        response.status_code = "400"
+        return response
+    decoded_jwt = jwt.decode(JWT_cookies, 'secret_key', algorithms="HS256")
+    userId = decoded_jwt["id"]
+
+    try:
+        conn = get_connection()
+        cur = conn.cursor(dictionary=True)
+        cur.execute("SELECT * FROM booking WHERE userId = %s AND date = %s AND time = %s", [userId, date, time])
+        result = cur.fetchone()
+        if result != None:
+            response = jsonify({ "error": True, "message": "此日期時間已預定" })
+            response.status_code = "400"
+            return response        
+        cur.execute("INSERT INTO booking (attractionId, date, time, price, userId) VALUES (%s, %s, %s, %s, %s);", [attractionId, date, time, price, userId])
+        conn.commit()
+        response = jsonify({ "ok": True })
+        return response
+
+    except Exception as e:
+        print(e)
+        fail = {"error": True,"message": "伺服器內部錯誤"}
+        response = app.response_class(response=json.dumps(fail),
+                                    status=500, content_type='application/json')
+        return response
+    
+    finally:
+        cur.close()
+        conn.close()
+
+
+@app.route("/api/booking", methods=['GET'])
+def get_booking():
+    JWT_cookies = request.cookies.get("token")
+    if JWT_cookies == None:
+        response = jsonify({"error": True,"message": "請先登入系統"})
+        response.status_code = "403"
+        return response
+    decoded_jwt = jwt.decode(JWT_cookies, 'secret_key', algorithms="HS256")
+    userId = decoded_jwt["id"]
+
+    try:
+        conn = get_connection()
+        cur = conn.cursor(dictionary=True)
+        cur.execute("SELECT booking.id, attractionId, name, address, images, date, time, price FROM booking INNER JOIN attraction ON attraction.id = booking.attractionId WHERE userId = %s ORDER BY booking.id DESC LIMIT 1",[userId])
+        result=cur.fetchone()
+        if result != None:
+            alldata = {
+                    "attraction":{
+                        "id": result["attractionId"],
+                        "name": result["name"],
+                        "address": result["address"],
+                        "image": result['images'].split(", ")[0]
+                    },
+                    "date": str(result["date"]),
+                    "time": result["time"],
+                    "price": result["price"]
+                }  
+            response = jsonify({ "data": alldata })
+            print(response)
+            return response
+        response = jsonify({ "data": None })
+        return response
+    
+    except Exception as e:
+        print(e)
+        fail = {"error": True,"message": "伺服器內部錯誤"}
+        response = app.response_class(response=json.dumps(fail),
+                                    status=500, content_type='application/json')
+        return response
+    
+    finally:
+        cur.close()
+        conn.close()
+
+
+@app.route("/api/booking", methods=['DELETE'])
+def delete_booking():
+    JWT_cookies = request.cookies.get("token")
+    response = make_response(jsonify({"ok": True}))
+    if JWT_cookies == None:
+        response = jsonify({"error": True,"message": "請先登入系統"})
+        response.status_code = "403"
+        return response
+    decoded_jwt = jwt.decode(JWT_cookies, 'secret_key', algorithms="HS256")
+    userId = decoded_jwt["id"]
+    try:
+        conn = get_connection()
+        cur = conn.cursor(dictionary=True)
+        # 一個一個刪
+        # cur.execute("DELETE FROM booking WHERE userId = %s AND attractionId = %s AND date = %s AND time = %s", [userId, attractionId, date, time])
+        # 只要是這個userId全部刪除
+        cur.execute("DELETE FROM booking WHERE userId = %s", [userId])
+        conn.commit()
+        response = jsonify({"ok":True})
+        return response
+    
+    except Exception as e:
+        print(e)
+        fail = {"error": True,"message": "伺服器內部錯誤"}
+        response = app.response_class(response=json.dumps(fail),
+                                    status=500, content_type='application/json')
+        return response
+
+    finally:
+        cur.close()
+        conn.close()
 
 
 # Pages
