@@ -11,6 +11,12 @@
     opacity: 0;
 }
 
+.header_login,
+.header_logout,
+.header_booking {
+    cursor: pointer;
+}
+
 .decobar {
     background: linear-gradient(270deg, #337788 0%, #66AABB 100%);
     border-radius: 10px 10px 0px 0px;
