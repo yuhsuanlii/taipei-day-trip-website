@@ -5,16 +5,11 @@ import jwt
 from flask_bcrypt import generate_password_hash, check_password_hash
 from datetime import *
 import requests
-# import configparser
 import os
 from dotenv import load_dotenv
 
 load_dotenv('.env')
 partner_key = os.getenv("PARTNER_KEY")
-
-# config = configparser.ConfigParser()
-# config.read('config.ini')
-# partner_key = config['PARTNER_KEY']['partner_key']
 
 app=Flask(__name__)
 app.config["JSON_AS_ASCII"]=False
