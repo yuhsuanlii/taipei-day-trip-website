@@ -89,6 +89,83 @@
             <div></div>
         </div>
         <div class="main">
+            <div class="myBook show">
+                <div class="bookinglist">
+                    <div></div>
+                    <!-- pic -->
+                    <div class="bookingpic">
+                        <img src="" alt="" id="bimg">
+                    </div>
+                    <!-- info -->
+                    <div class="maininfo">
+                        <div class="bookingtitle">
+                            台北一日遊：
+                            <span class="bookingname"></span>
+                        </div>
+                        <div class="bookingdetail">
+                            <p>日期：
+                                <span>2021-12-13</span>
+                            </p>
+                            <p>時間：
+                                <span class="bhour">${hour}</span>
+                            </p>
+                            <p>費用：
+                                新台幣 <span class="bprice" id="field-price"></span> 元
+                            </p>
+                            <p>地點：
+                                <span class="baddr"></span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="bookingdelete">
+                        <img src="/static/img/icon_delete.png">
+                    </div>
+                </div>
+
+                <div class="bookingcontact">
+                    <div></div>
+                    <div class="binfo">
+                        <p class="bnotice1">您的聯絡資訊</p>
+                        <div class="btitle">聯絡姓名：
+                            <input type="text" class="binput inputName" required>
+                        </div>
+                        <div class="btitle">連絡信箱：
+                            <input type="email" class="binput inputEmail" required>
+                        </div>
+                        <div class="btitle">手機號碼：
+                            <input type="tel" class="binput inputPhone" maxlength="10" pattern="^1[0-9]{10}$"
+                                title="手機號格式不正確" required>
+                        </div>
+                        <p class="bnotice2">請保持手機暢通，準時到達，導覽人員將用手機與您聯繫，務必留下正確的聯絡方式。</p>
+                    </div>
+                    <div></div>
+                </div>
+                <div class="bookingcontact">
+                    <div></div>
+                    <div class="bcard">
+                        <p class="bnotice10">信用卡付款資訊</p>
+                        <div class="btitle">
+                            卡片號碼：<div class="tpfield" id="card-number"></div>
+                        </div>
+                        <div class="btitle">
+                            過期時間：<div class="tpfield" id="card-expiration-date"></div>
+                        </div>
+                        <div class="btitle">
+                            驗證密碼：<div class="tpfield" id="card-ccv"></div>
+                        </div>
+
+                    </div>
+                    <div></div>
+                </div>
+                <div class="bookingbottom">
+                    <div></div>
+                    <div class="bookingbutton">
+                        <div class="bnotice2">總價：新台幣 <span class="totleprice" id="field-price"></span> 元</div><br>
+                        <label class="orderMsg"></label><button class="bbutton" onclick="onClick()">確認訂購並付款</button>
+                    </div>
+                    <div></div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -98,9 +175,13 @@
     </footer>
     <div class="fakefooter show"></div>
 
+    <!-- tappay -->
+    <script src="https://js.tappaysdk.com/sdk/tpdirect/v5.14.0"></script>
+
     <!-- JS -->
     <script src="/static/login.js"></script>
     <script src="/static/booking.js"></script>
+
 </body>
 
 </html>

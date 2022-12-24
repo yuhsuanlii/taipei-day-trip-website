@@ -4,6 +4,12 @@ import re
 import jwt
 from flask_bcrypt import generate_password_hash, check_password_hash
 from datetime import *
+import requests
+import configparser
+
+config = configparser.ConfigParser()
+config.read('config.ini')
+partner_key = config['PARTNER_KEY']['partner_key']
 
 app=Flask(__name__)
 app.config["JSON_AS_ASCII"]=False
@@ -390,6 +396,163 @@ def delete_booking():
     finally:
         cur.close()
         conn.close()
+
+
+# Orders API
+@app.route("/api/orders", methods=['POST'])
+def post_orders():
+
+    JWT_cookies = request.cookies.get("token")       
+    if JWT_cookies == None:
+        response = jsonify({"error": True,"message": "請先登入系統"})
+        response.status_code = "403"
+        return response
+    
+    decoded_jwt = jwt.decode(JWT_cookies, 'secret_key', algorithms="HS256")
+    userId = decoded_jwt["id"]
+
+    data = request.get_json()
+    print(data)
+    prime = data["prime"]
+    order = data["order"]["trip"]
+    contactName = data["contact"]["name"]
+    contactEmail = data["contact"]["email"]
+    contactPhone = data["contact"]["phone"]
+    attractionId = data["order"]["trip"]["attraction"]["id"]
+    date = data["order"]["trip"]["date"]
+    time = data["order"]["trip"]["time"]
+    price = data["order"]["trip"]["price"]
+
+    # 20221223+時分+會員id+景點id
+    now = datetime.now()
+    order_number = now.strftime("%Y%m%d%H%M") + str(userId) + str(attractionId)
+
+    if contactName=="" or contactEmail=="" or contactPhone=="":
+        response = jsonify({"error": True,"message": "訂單建立失敗，請確認填寫資料"})
+        response.status_code = "400"
+        return response
+
+    try:
+        conn = get_connection()
+        cur = conn.cursor(dictionary=True)    
+        cur.execute("INSERT INTO orders (number, userId, attractionId, date, time, price, contactName, contactEmail, phone, status) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s);",[order_number, userId, attractionId, date, time, price, contactName, contactEmail, contactPhone, "未付款"])
+        conn.commit()
+        # 刪除購物車資料
+        cur.execute("DELETE FROM booking WHERE userId = %s", [userId])
+        conn.commit()
+
+        # TapPay
+        url = "https://sandbox.tappaysdk.com/tpc/payment/pay-by-prime"
+        headers = {
+            "Content-Type": "application/json",
+            "x-api-key": partner_key
+        }
+        data = {
+            "prime": prime,
+            "partner_key": partner_key,
+            "merchant_id": "charlie9684_TAISHIN",
+            "details": f"Taipei Day Trip - Order Number: {order_number}",
+            "amount": price,
+            "cardholder": {
+                "phone_number": contactPhone,
+                "name": contactName,
+                "email": contactEmail
+            },
+            "remember": True
+        }
+        tappay = requests.post(url, headers = headers, json = data).json()
+        if tappay["status"] == 0:
+            cur.execute("UPDATE orders SET status = %s WHERE number = %s", ["已付款", order_number])
+            conn.commit()
+            response = jsonify({
+                "data": {
+                    "number": order_number,
+                    "payment": {
+                        "status": tappay["status"],
+                        "message": "付款成功"
+                        }
+                }
+            })
+            return response
+        response = jsonify({
+            "data": {
+                "number": order_number,
+                "payment": {
+                    "status": tappay["status"],
+                    "message": "付款失敗"
+                    }
+            }
+        })
+        
+    except Exception as e:
+        print(e)
+        fail = {"error": True,"message": "伺服器內部錯誤"}
+        response = app.response_class(response=json.dumps(fail),
+                                    status=500, content_type='application/json')
+        return response
+    
+    finally:
+        cur.close()
+        conn.close()
+
+
+@app.route("/api/orders/<orderNum>", methods=['GET'])
+def get_orders(orderNum):
+    
+    JWT_cookies = request.cookies.get("token")       
+    if JWT_cookies == None:
+        response = jsonify({"error": True,"message": "請先登入系統"})
+        response.status_code = "403"
+        return response
+    decoded_jwt = jwt.decode(JWT_cookies, 'secret_key', algorithms="HS256")
+    userId = decoded_jwt["id"]
+    
+    try:
+        conn = get_connection()
+        cur = conn.cursor(dictionary=True)
+        cur.execute("SELECT orders.*, attraction.id, attraction.name, attraction.address, attraction.images FROM orders INNER JOIN attraction ON attraction.id = orders.attractionId WHERE orders.userId = %s AND orders.number = %s",[userId, orderNum])
+        result = cur.fetchone()
+        # print(result)
+        if result != None:
+            orderdata = {
+                    "number": result["number"],
+                    "price": result["price"],
+                    "trip":{
+                        "attraction":{
+                            "id": result["attractionId"],
+                            "name": result["name"],
+                            "address": result["address"],
+                            "image": result['images'].split(", ")[0]
+                        },
+                        "date": str(result["date"]),
+                        "time": result["time"],
+                    },
+                    "contact":{
+                        "name": result["contactName"],
+                        "email": result["contactEmail"],
+                        "phone": result["phone"]
+                    },
+                    "status":result["status"]
+                }  
+            response = jsonify({ "data": orderdata })
+            # print(orderdata)
+            return response
+        response = jsonify({ "data": None })
+        return response
+    
+    except Exception as e:
+        print(e)
+        fail = {"error": True,"message": "伺服器內部錯誤"}
+        response = app.response_class(response=json.dumps(fail),
+                                    status=500, content_type='application/json')
+        return response
+    
+    finally:
+        cur.close()
+        conn.close()
+
+
+
 
 
 # Pages
