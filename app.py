@@ -442,7 +442,7 @@ def post_orders():
 
     try:
         conn = get_connection()
-        cur = conn.cursor(dictionary=True)    
+        cur = conn.cursor(dictionary=True)     
         cur.execute("INSERT INTO orders (number, userId, attractionId, date, time, price, contactName, contactEmail, phone, status) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s);",[order_number, userId, attractionId, date, time, price, contactName, contactEmail, contactPhone, "未付款"])
         conn.commit()
         # 刪除購物車資料
@@ -491,7 +491,6 @@ def post_orders():
                     }
             }
         })
-        return response
         
     except Exception as e:
         print(e)
