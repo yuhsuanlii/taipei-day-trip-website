@@ -10,12 +10,15 @@ from dotenv import load_dotenv
 
 load_dotenv('.env')
 partner_key = os.getenv("PARTNER_KEY")
+merchant_id = os.getenv("MERCHANT_ID")
+mysql_user = os.getenv("MYSQL_USER")
+mysql_pwd = os.getenv("MYSQL_PASSWORD")
+mysql_db = os.getenv("MYSQL_DATABASE")
 
 app=Flask(__name__)
 app.config["JSON_AS_ASCII"]=False
 app.config["TEMPLATES_AUTO_RELOAD"]=True
 app.config["JSON_SORT_KEYS"]=False
-app.config['SECRET_KEY'] = b'\x8f\xef\xa5\xba#8.9\xa5A]\xdd\xc4\x1b\x8d\x0c'
 
 def get_connection():
     connection = pooling.MySQLConnectionPool(
@@ -23,9 +26,9 @@ def get_connection():
         pool_size = 20,
         pool_reset_session = True,
         host = 'localhost',
-        user = 'root',
-        password = 'rootroot',
-        database = 'daytrip'
+        user = mysql_user,
+        password = mysql_pwd,
+        database = mysql_db
         )
     conn = connection.get_connection()
     return conn
@@ -450,7 +453,7 @@ def post_orders():
         data = {
             "prime": prime,
             "partner_key": partner_key,
-            "merchant_id": "charlie9684_TAISHIN",
+            "merchant_id": merchant_id,
             "details": f"Taipei Day Trip - Order Number: {order_number}",
             "amount": price,
             "cardholder": {

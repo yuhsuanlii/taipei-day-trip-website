@@ -5,6 +5,15 @@ let afternoon = document.getElementById("afternoon");
 let radio1 = document.querySelector(".radio1")
 let radio2 = document.querySelector(".radio2")
 
+
+
+let now = new Date();
+console.log(now.toISOString()) // 2022-12-28T09:05:37.383Z
+let today = now.toISOString().split('T')[0];
+document.getElementById("booking_date").min = today;
+
+// ------------------------------------------------
+
 field_price.innerText = morning.value
 
 radio1.addEventListener('click', function () {
@@ -133,7 +142,6 @@ function book(){
 }
 
 async function myBooking(attractionId, date, bookTime, price) {
-
     try {
         const response = await fetch(`${originURL}/api/booking`, {
             method: "POST",
@@ -163,4 +171,3 @@ async function myBooking(attractionId, date, bookTime, price) {
         console.log("error", error);
     }
 }
-
