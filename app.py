@@ -562,6 +562,64 @@ def get_orders(orderNum):
         conn.close()
 
 
+@app.route("/api/orders", methods=['GET'])
+def get_orderlist():
+    
+    JWT_cookies = request.cookies.get("token")       
+    if JWT_cookies == None:
+        response = jsonify({"error": True,"message": "請先登入系統"})
+        response.status_code = "403"
+        return response
+    decoded_jwt = jwt.decode(JWT_cookies, 'secret_key', algorithms="HS256")
+    userId = decoded_jwt["id"]
+    
+    try:
+        conn = get_connection()
+        cur = conn.cursor(dictionary=True)
+        cur.execute("SELECT orders.*, attraction.id, attraction.name, attraction.address, attraction.images FROM orders INNER JOIN attraction ON attraction.id = orders.attractionId WHERE orders.userId = %s ORDER BY orders.id DESC",[userId])
+        result = cur.fetchall()
+        # print(result)
+        if result != []:
+            data = []
+            for i in result:
+                data_group = {
+                    "number": i["number"],
+                    "price": i["price"],
+                    "trip":{
+                        "attraction":{
+                            "id": i["attractionId"],
+                            "name": i["name"],
+                            "address": i["address"],
+                            "image": i['images'].split(", ")[0]
+                        },
+                        "date": str(i["date"]),
+                        "time": i["time"],
+                    },
+                    "contact":{
+                        "name": i["contactName"],
+                        "email": i["contactEmail"],
+                        "phone": i["phone"]
+                    },
+                    "status":i["status"]
+                }
+                data.append(data_group)    
+
+            response = jsonify({ "data": data })
+            # print(orderdata)
+            return response
+        response = jsonify({ "data": None })
+        return response
+    
+    except Exception as e:
+        print(e)
+        fail = {"error": True,"message": "伺服器內部錯誤"}
+        response = app.response_class(response=json.dumps(fail),
+                                    status=500, content_type='application/json')
+        return response
+    
+    finally:
+        cur.close()
+        conn.close()
 
 
 
@@ -578,6 +636,9 @@ def booking():
 @app.route("/thankyou")
 def thankyou():
 	return render_template("thankyou.html")
+@app.route("/history")
+def history():
+	return render_template("history.html")
 
 if __name__=="__main__":
     app.run(host="0.0.0.0", port=3000, debug=True)

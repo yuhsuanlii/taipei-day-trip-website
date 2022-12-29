@@ -15,6 +15,7 @@ window.onload = function checkSigninStatus() {
             let result = data.data;
             if (result != null) {
                 header_logout.classList.remove("show");
+                header_history.classList.remove("show");
                 header_login.remove();
                 showOrderNum();
             } else {

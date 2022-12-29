@@ -6,20 +6,23 @@
 .show.header_logout,
 .show.login_wrapper,
 .show.signup_wrapper,
-.show.mask {
+.show.mask,
+.show.header_history {
     visibility: hidden;
     opacity: 0;
 }
 
 .header_login,
 .header_logout,
-.header_booking {
+.header_booking,
+.header_history {
     cursor: pointer;
 }
 
 .header_login:hover,
 .header_logout:hover,
-.header_booking:hover {
+.header_booking:hover,
+.header_history:hover {
     color: #448899;
 }
 

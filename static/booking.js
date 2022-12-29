@@ -22,7 +22,11 @@ window.onload = function checkSigninStatus() {
       if (result != null) {
         bname.textContent = result.name;
         header_logout.classList.remove("show");
+        header_history.classList.remove("show");
         header_login.remove();
+        // 預先填入會員資料
+        inputName.value = result.name;
+        inputEmail.value = result.email;
         getData();
       } else {
         document.location.href = "/";

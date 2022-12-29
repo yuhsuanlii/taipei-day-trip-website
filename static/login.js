@@ -13,6 +13,10 @@ let pathname = location.pathname;
 let loginform = document.querySelector("#loginform");
 let signupform = document.querySelector("#signupform");
 let header_booking = document.querySelector(".header_booking");
+let header_history = document.querySelector(".header_history");
+let line = document.querySelector(".line");
+
+
 
 // header預訂行程
 header_booking.addEventListener("click", () => {
@@ -42,10 +46,13 @@ window.onload = function checkSigninStatus() {
             let result = data.data;
             if (result != null) {
                 header_logout.classList.remove("show");
+                header_history.classList.remove("show");
                 header_login.remove();
             } else {
                 header_login.classList.remove("show");
                 header_logout.remove();
+                header_history.remove();
+                line.remove();
             }
         });
 }
@@ -90,6 +97,11 @@ mask.addEventListener("click", () => {
     login_wrapper.classList.add("show");
     signup_wrapper.classList.add("show");
     mask.classList.add("show")
+});
+
+// 歷史紀錄
+header_history.addEventListener("click", () => {
+    document.location.href = "/history";
 });
 
 // 輸入錯誤後，按其他地方會清空錯誤訊息
