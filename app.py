@@ -283,6 +283,7 @@ def post_booking():
     date = request.json["date"]
     time = request.json["time"]
     price = request.json["price"]
+    today = datetime.now().strftime('%Y-%m-%d')
 
     # 如果cookie沒有token
     JWT_cookies = request.cookies.get("token")       
@@ -305,7 +306,11 @@ def post_booking():
         if result != None:
             response = jsonify({ "error": True, "message": "此日期時間已預定" })
             response.status_code = "400"
-            return response        
+            return response
+        if  date < today:
+            response = jsonify({ "error": True, "message": "無法選擇過去日期" })
+            response.status_code = "400"
+            return response
         cur.execute("INSERT INTO booking (attractionId, date, time, price, userId) VALUES (%s, %s, %s, %s, %s);", [attractionId, date, time, price, userId])
         conn.commit()
         response = jsonify({ "ok": True })
