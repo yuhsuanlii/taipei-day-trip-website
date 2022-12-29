@@ -57,6 +57,8 @@ let bhour = document.querySelector(".bhour");
 let bprice = document.querySelector(".bprice");
 let baddr = document.querySelector(".baddr");
 let totleprice = document.querySelector(".totleprice");
+let bdate = document.querySelector(".bdate");
+
 
 
 function myBooking(result) {
@@ -73,6 +75,7 @@ function myBooking(result) {
   bprice.innerText = result.price;
   baddr.innerText = result.attraction.address
   totleprice.innerText = result.price;
+  bdate.innerText = result.date;
 
   let bookingdelete = document.querySelector(".bookingdelete");
   bookingdelete.addEventListener("click", () => {
