@@ -479,6 +479,8 @@ def post_orders():
                         }
                 }
             })
+            return response
+            
         cur.execute("UPDATE orders SET status = %s WHERE number = %s", ["已付款", order_number])
         conn.commit()
         response = jsonify({
