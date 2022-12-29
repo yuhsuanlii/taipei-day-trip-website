@@ -183,7 +183,8 @@ footer>div {
 .radio {
     /* 原始的radio藏在下面 */
     position: relative;
-    top: 0px
+    top: 0px;
+    cursor: pointer;
 }
 
 /* Create a custom radio button */
@@ -357,6 +358,7 @@ hr {
     font-weight: 500;
     font-size: 16px;
     line-height: 13px;
+    cursor: pointer;
 }
 
 .detail {

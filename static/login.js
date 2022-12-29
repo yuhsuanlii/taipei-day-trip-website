@@ -63,6 +63,7 @@ clicktosign.addEventListener("click", () => {
     signup_wrapper.classList.remove("show");
     login_wrapper.classList.add("show");
     mask.classList.remove("show")
+    login_message.innerText="";
 });
 
 // 點此登入
@@ -70,6 +71,7 @@ clicktologin.addEventListener("click", () => {
     login_wrapper.classList.remove("show");
     signup_wrapper.classList.add("show");
     mask.classList.remove("show");
+    signup_message.innerText="";
 });
 
 // icon X
@@ -122,7 +124,6 @@ loginButton.addEventListener("click", function () {
                 document.location.href = originURL + pathname;
 
             } else if (data.error) {
-                //   signinError.classList.remove("none");
                 login_message.textContent = data.message;
             }
         })

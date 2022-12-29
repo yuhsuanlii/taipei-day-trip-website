@@ -17,6 +17,12 @@
     cursor: pointer;
 }
 
+.header_login:hover,
+.header_logout:hover,
+.header_booking:hover {
+    color: #448899;
+}
+
 .decobar {
     background: linear-gradient(270deg, #337788 0%, #66AABB 100%);
     border-radius: 10px 10px 0px 0px;

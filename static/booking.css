@@ -15,6 +15,9 @@
     padding: 9px;
 }
 
+.bookingdelete{
+    cursor: pointer;
+}
 
 .show.main,
 .show.fakefooter,
@@ -193,7 +196,6 @@ footer>div {
     font-size: 16px;
     line-height: 20px;
     color: rgb(185, 38, 38);
-    padding-right: 5px;
 }
 
 .btitle {

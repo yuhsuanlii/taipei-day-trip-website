@@ -148,15 +148,15 @@ TPDirect.card.setup({
     },
     // Styling ccv field
     "input#ccv": {
-      "font-size": "17px",
+      "font-size": "18px",
     },
     // Styling expiration-date field
     "input#expiration-date": {
-      "font-size": "17px",
+      "font-size": "18px",
     },
     // Styling card-number field
     "input#card-number": {
-      "font-size": "17px",
+      "font-size": "18px",
     },
     // style focus state
     ":focus": {

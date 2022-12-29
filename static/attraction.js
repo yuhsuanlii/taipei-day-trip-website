@@ -4,7 +4,8 @@ let morning = document.getElementById("morning");
 let afternoon = document.getElementById("afternoon");
 let radio1 = document.querySelector(".radio1")
 let radio2 = document.querySelector(".radio2")
-
+let bookingText = document.querySelector(".booking-text");
+let booking = document.querySelector(".booking")
 
 
 let now = new Date();
@@ -18,11 +19,17 @@ field_price.innerText = morning.value
 
 radio1.addEventListener('click', function () {
     field_price.innerText = morning.value
+    bookingText.innerText = "";
 }, false);
 
 radio2.addEventListener('click', function () {
     field_price.innerText = afternoon.value
+    bookingText.innerText = "";
 }, false);
+
+booking.addEventListener('click', function () {
+    bookingText.innerText = "";
+});
 
 // ---------------------------------------------------------------
 
@@ -160,10 +167,10 @@ async function myBooking(attractionId, date, bookTime, price) {
         }
         const data = await response.json();
         if (data.ok) {
+            bookingText.innerText = "";
             document.location.href = "/booking";
         } else if (data.error) {
             // 按下按鈕但未登入
-            const bookingText = document.querySelector(".booking-text");
             bookingText.classList.remove("show");
             bookingText.textContent = data.message;
         }
