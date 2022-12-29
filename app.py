@@ -469,29 +469,29 @@ def post_orders():
             "remember": True
         }
         tappay = requests.post(url, headers = headers, json = data).json()
-        if tappay["status"] == 0:
-            cur.execute("UPDATE orders SET status = %s WHERE number = %s", ["已付款", order_number])
-            conn.commit()
+        if tappay["status"] != 0:
             response = jsonify({
                 "data": {
                     "number": order_number,
                     "payment": {
                         "status": tappay["status"],
-                        "message": "付款成功"
+                        "message": "付款失敗"
                         }
                 }
             })
-            return response
+        cur.execute("UPDATE orders SET status = %s WHERE number = %s", ["已付款", order_number])
+        conn.commit()
         response = jsonify({
             "data": {
                 "number": order_number,
                 "payment": {
                     "status": tappay["status"],
-                    "message": "付款失敗"
+                    "message": "付款成功"
                     }
             }
         })
-        
+        return response
+
     except Exception as e:
         print(e)
         fail = {"error": True,"message": "伺服器內部錯誤"}
