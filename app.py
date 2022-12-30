@@ -468,7 +468,10 @@ def post_orders():
             },
             "remember": True
         }
+
         tappay = requests.post(url, headers = headers, json = data).json()
+        print("tappay status: " + str(tappay["status"]))
+
         if tappay["status"] != 0:
             response = jsonify({
                 "data": {
@@ -562,7 +565,7 @@ def get_orders(orderNum):
         conn.close()
 
 
-@app.route("/api/orders", methods=['GET'])
+@app.route("/api/order", methods=['GET'])
 def get_orderlist():
     
     JWT_cookies = request.cookies.get("token")       

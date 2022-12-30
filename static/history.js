@@ -28,7 +28,7 @@ window.onload = function checkSigninStatus() {
 let myBook = document.querySelector(".myBook");
 
 async function getData() {
-    const response = await fetch(`${originURL}/api/orders`);
+    const response = await fetch(`${originURL}/api/order`);
     const data = await response.json();
     result = data.data;
     console.log(result)
@@ -109,13 +109,13 @@ function myBooking(result) {
                             <p>• 狀態：
                                 <span class="bstaus1">${bstatus}</span>
                             </p>
-                            <p>• 聯絡人：
+                            <p>• 聯絡姓名：
                                 <span class="contactName">${contactName}</span>
                             </p>
-                            <p>• Email：
+                            <p>• 聯絡姓名：
                                 <span class="contactEmail">${contactEmail}</span>
                             </p>
-                            <p>• 連絡電話：
+                            <p>• 手機號碼：
                                 <span class="contactPhone">${contactPhone}</span>
                             </p>
                         </div>
