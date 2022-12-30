@@ -33,19 +33,21 @@ async function getData() {
     result = data.data;
     console.log(result)
 
-    if (result != null && result.length >= 4) {
-        history.classList.remove("show");
-        fakefooter.remove();
-        myBooking(result);
-    }else if(result.length < 4){
-        history.classList.remove("show");
-        fakefooter.classList.remove("show");
-        myBooking(result);
-    } else {
+    if(result == null){
         noBooking();
         console.log("no booking");
         history.remove();
         fakefooter.classList.remove("show");
+    }
+
+    if (result != null && result.length >= 4) {
+        history.classList.remove("show");
+        fakefooter.remove();
+        myBooking(result);
+    }else if( 0 < result.length < 4){
+        history.classList.remove("show");
+        fakefooter.classList.remove("show");
+        myBooking(result);
     }
 }
 
