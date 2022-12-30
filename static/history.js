@@ -83,7 +83,6 @@ function myBooking(result) {
                 <div class="maininfo">
                     <div>
                         <div class="bookingtitle">
-                            台北一日遊：
                             <span class="bookingname">${bookingname}</span>
                         </div>
                         <div class="bookingdetail">
