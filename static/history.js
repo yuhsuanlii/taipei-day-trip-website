@@ -105,13 +105,13 @@ function myBooking(result) {
                             <div class="contecttitle">
                                 <span>&emsp;</span>
                             </div>
-                            <p>• 狀態：
+                            <p>• 訂單狀態：
                                 <span class="bstaus1">${bstatus}</span>
                             </p>
                             <p>• 聯絡姓名：
                                 <span class="contactName">${contactName}</span>
                             </p>
-                            <p>• 聯絡姓名：
+                            <p>• 聯絡信箱：
                                 <span class="contactEmail">${contactEmail}</span>
                             </p>
                             <p>• 手機號碼：
