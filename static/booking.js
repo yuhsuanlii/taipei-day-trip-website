@@ -22,7 +22,11 @@ window.onload = function checkSigninStatus() {
       if (result != null) {
         bname.textContent = result.name;
         header_logout.classList.remove("show");
+        header_history.classList.remove("show");
         header_login.remove();
+        // 預先填入會員資料
+        inputName.value = result.name;
+        inputEmail.value = result.email;
         getData();
       } else {
         document.location.href = "/";
@@ -57,6 +61,8 @@ let bhour = document.querySelector(".bhour");
 let bprice = document.querySelector(".bprice");
 let baddr = document.querySelector(".baddr");
 let totleprice = document.querySelector(".totleprice");
+let bdate = document.querySelector(".bdate");
+
 
 
 function myBooking(result) {
@@ -73,6 +79,7 @@ function myBooking(result) {
   bprice.innerText = result.price;
   baddr.innerText = result.attraction.address
   totleprice.innerText = result.price;
+  bdate.innerText = result.date;
 
   let bookingdelete = document.querySelector(".bookingdelete");
   bookingdelete.addEventListener("click", () => {
@@ -148,15 +155,15 @@ TPDirect.card.setup({
     },
     // Styling ccv field
     "input#ccv": {
-      "font-size": "17px",
+      "font-size": "18px",
     },
     // Styling expiration-date field
     "input#expiration-date": {
-      "font-size": "17px",
+      "font-size": "18px",
     },
     // Styling card-number field
     "input#card-number": {
-      "font-size": "17px",
+      "font-size": "18px",
     },
     // style focus state
     ":focus": {

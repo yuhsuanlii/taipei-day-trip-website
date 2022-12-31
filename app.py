@@ -10,12 +10,15 @@ from dotenv import load_dotenv
 
 load_dotenv('.env')
 partner_key = os.getenv("PARTNER_KEY")
+merchant_id = os.getenv("MERCHANT_ID")
+mysql_user = os.getenv("MYSQL_USER")
+mysql_pwd = os.getenv("MYSQL_PASSWORD")
+mysql_db = os.getenv("MYSQL_DATABASE")
 
 app=Flask(__name__)
 app.config["JSON_AS_ASCII"]=False
 app.config["TEMPLATES_AUTO_RELOAD"]=True
 app.config["JSON_SORT_KEYS"]=False
-app.config['SECRET_KEY'] = b'\x8f\xef\xa5\xba#8.9\xa5A]\xdd\xc4\x1b\x8d\x0c'
 
 def get_connection():
     connection = pooling.MySQLConnectionPool(
@@ -23,9 +26,9 @@ def get_connection():
         pool_size = 20,
         pool_reset_session = True,
         host = 'localhost',
-        user = 'root',
-        password = 'rootroot',
-        database = 'daytrip'
+        user = mysql_user,
+        password = mysql_pwd,
+        database = mysql_db
         )
     conn = connection.get_connection()
     return conn
@@ -280,6 +283,7 @@ def post_booking():
     date = request.json["date"]
     time = request.json["time"]
     price = request.json["price"]
+    today = datetime.now().strftime('%Y-%m-%d')
 
     # 如果cookie沒有token
     JWT_cookies = request.cookies.get("token")       
@@ -302,7 +306,11 @@ def post_booking():
         if result != None:
             response = jsonify({ "error": True, "message": "此日期時間已預定" })
             response.status_code = "400"
-            return response        
+            return response
+        if  date < today:
+            response = jsonify({ "error": True, "message": "無法選擇過去日期" })
+            response.status_code = "400"
+            return response
         cur.execute("INSERT INTO booking (attractionId, date, time, price, userId) VALUES (%s, %s, %s, %s, %s);", [attractionId, date, time, price, userId])
         conn.commit()
         response = jsonify({ "ok": True })
@@ -434,7 +442,7 @@ def post_orders():
 
     try:
         conn = get_connection()
-        cur = conn.cursor(dictionary=True)    
+        cur = conn.cursor(dictionary=True)     
         cur.execute("INSERT INTO orders (number, userId, attractionId, date, time, price, contactName, contactEmail, phone, status) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s);",[order_number, userId, attractionId, date, time, price, contactName, contactEmail, contactPhone, "未付款"])
         conn.commit()
         # 刪除購物車資料
@@ -450,7 +458,7 @@ def post_orders():
         data = {
             "prime": prime,
             "partner_key": partner_key,
-            "merchant_id": "charlie9684_TAISHIN",
+            "merchant_id": merchant_id,
             "details": f"Taipei Day Trip - Order Number: {order_number}",
             "amount": price,
             "cardholder": {
@@ -460,30 +468,35 @@ def post_orders():
             },
             "remember": True
         }
+
         tappay = requests.post(url, headers = headers, json = data).json()
-        if tappay["status"] == 0:
-            cur.execute("UPDATE orders SET status = %s WHERE number = %s", ["已付款", order_number])
-            conn.commit()
+        print("tappay status: " + str(tappay["status"]))
+
+        if tappay["status"] != 0:
             response = jsonify({
                 "data": {
                     "number": order_number,
                     "payment": {
                         "status": tappay["status"],
-                        "message": "付款成功"
+                        "message": "付款失敗"
                         }
                 }
             })
             return response
+            
+        cur.execute("UPDATE orders SET status = %s WHERE number = %s", ["已付款", order_number])
+        conn.commit()
         response = jsonify({
             "data": {
                 "number": order_number,
                 "payment": {
                     "status": tappay["status"],
-                    "message": "付款失敗"
+                    "message": "付款成功"
                     }
             }
         })
-        
+        return response
+
     except Exception as e:
         print(e)
         fail = {"error": True,"message": "伺服器內部錯誤"}
@@ -552,6 +565,64 @@ def get_orders(orderNum):
         conn.close()
 
 
+@app.route("/api/order", methods=['GET'])
+def get_orderlist():
+    
+    JWT_cookies = request.cookies.get("token")       
+    if JWT_cookies == None:
+        response = jsonify({"error": True,"message": "請先登入系統"})
+        response.status_code = "403"
+        return response
+    decoded_jwt = jwt.decode(JWT_cookies, 'secret_key', algorithms="HS256")
+    userId = decoded_jwt["id"]
+    
+    try:
+        conn = get_connection()
+        cur = conn.cursor(dictionary=True)
+        cur.execute("SELECT orders.*, attraction.id, attraction.name, attraction.address, attraction.images FROM orders INNER JOIN attraction ON attraction.id = orders.attractionId WHERE orders.userId = %s ORDER BY orders.id DESC",[userId])
+        result = cur.fetchall()
+        # print(result)
+        if result != []:
+            data = []
+            for i in result:
+                data_group = {
+                    "number": i["number"],
+                    "price": i["price"],
+                    "trip":{
+                        "attraction":{
+                            "id": i["attractionId"],
+                            "name": i["name"],
+                            "address": i["address"],
+                            "image": i['images'].split(", ")[0]
+                        },
+                        "date": str(i["date"]),
+                        "time": i["time"],
+                    },
+                    "contact":{
+                        "name": i["contactName"],
+                        "email": i["contactEmail"],
+                        "phone": i["phone"]
+                    },
+                    "status":i["status"]
+                }
+                data.append(data_group)    
+
+            response = jsonify({ "data": data })
+            # print(orderdata)
+            return response
+        response = jsonify({ "data": None })
+        return response
+    
+    except Exception as e:
+        print(e)
+        fail = {"error": True,"message": "伺服器內部錯誤"}
+        response = app.response_class(response=json.dumps(fail),
+                                    status=500, content_type='application/json')
+        return response
+    
+    finally:
+        cur.close()
+        conn.close()
 
 
 
@@ -568,6 +639,9 @@ def booking():
 @app.route("/thankyou")
 def thankyou():
 	return render_template("thankyou.html")
+@app.route("/history")
+def history():
+	return render_template("history.html")
 
 
 if __name__=="__main__":

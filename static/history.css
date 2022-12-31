@@ -1,27 +1,67 @@
 @import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
 
 
-.tpfield {
-    position: relative;
-    top:-25px;
-    left: 85px;
+/* Collapsibles */
 
-    height: 20px;
-    width: 200px;
-    border: #E8E8E8 1px solid;
-    border-radius: 5px;
-    /* margin: 5px 0; */
-    margin-bottom: -10px;
-    padding: 9px;
-}
-
-.bookingdelete{
+.collapsible {
+    /* background-color: #777; */
+    /* color: white; */
+    background-color: #ffffff;
+    color: #448899;
     cursor: pointer;
+    padding-top: 18px;
+    padding-bottom: 10px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 20px;
+    width: min(95%, 960px);
+    margin: auto;
+    display: block;
+    border-bottom: #448899 3px solid;
+    font-family: 'Noto Sans TC', '微軟正黑體', sans-serif;
+    font-weight: 700;
 }
+
+.active,
+.collapsible:hover {
+    /* background-color: #555; */
+    background-color: #FFFFFF;
+}
+
+.collapsible:after {
+    content: '\002B';
+    /* color: white; */
+    color: #448899;
+    font-size: 25px;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
+.active:after {
+    content: "\2212";
+}
+
+.content {
+    /* padding: 0 18px; */
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    background-color: #E8E8E8;
+    /* background-color: #FFFFFF; */
+    margin: auto;
+    width: min(95%, 960px);
+    border-radius: 0px 0px 10px 10px;
+}
+
+/* Collapsibles end */
 
 .show.main,
 .show.fakefooter,
-.show.myBook {
+.show.myBook,
+.show.history {
     visibility: hidden;
     opacity: 0;
 }
@@ -123,9 +163,20 @@ footer>div {
     height: 240px;
     /* min-width: 100%; */
     display: grid;
-    grid-template-columns: 10% 25% 55% 10%;
-    border-bottom: #E8E8E8 1px solid;
+    grid-template-columns: 5% 30% 60% 5%;
+    /* border-bottom: #E8E8E8 1px solid; */
+    margin-top: 20px;
 }
+
+.maininfo {
+    grid-template-columns: 50% 50%;
+    display: grid;
+}
+
+.main{
+    padding-bottom: 50px;
+}
+
 
 .bookingpic {
     top: 0px;
@@ -143,59 +194,27 @@ footer>div {
 }
 
 
-.bookingtitle {
+.bookingtitle,
+.contecttitle {
     font-size: 16px;
     font-weight: 700;
     color: #448899;
     line-height: 30px;
 }
 
-.bookingdetail {
+.bookingdetail,
+.contactdetail {
     font-size: 16px;
     font-weight: 500;
     color: #666666;
     line-height: 20px;
 }
 
-.bookingcontact {
+
+.nobooking {
     display: grid;
     grid-template-columns: 10% 80% 10%;
-    padding-top: 30px;
-    padding-bottom: 30px;
-    /* font-size: 19px;
-    font-weight: 700;
-    color: #666666; */
-    border-bottom: #E8E8E8 1px solid;
-}
-
-.bnotice1 {
-    font-weight: 700;
-    font-size: 19px;
-    line-height: 16px;
-    color: #666666;
-    padding-bottom: 10px;
-}
-
-.bnotice10 {
-    font-weight: 700;
-    font-size: 19px;
-    line-height: 16px;
-    color: #666666;
-    padding-bottom: 20px;
-}
-
-.bnotice2 {
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 20px;
-    color: #666666;
-}
-
-.orderMsg{
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 20px;
-    color: rgb(185, 38, 38);
+    /* padding-bottom: 500px; */
 }
 
 .btitle {
@@ -204,68 +223,6 @@ footer>div {
     line-height: 13px;
     color: #666666;
     padding-bottom: 15px;
-}
-
-.binput {
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 13px;
-    width: 200px;
-    padding: 10px;
-    border: #E8E8E8 1px solid;
-    border-radius: 5px;
-    color: #757575;
-}
-
-
-.binput:focus {
-    /* border-bottom: 2px solid #448899; */
-    outline: none;
-    /* 去邊框 */
-}
-
-
-/* 隱藏number上下箭頭 */
-input[type=number]::-webkit-outer-spin-button,
-input[type=number]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-.bookingbottom {
-    display: grid;
-    grid-template-columns: 10% 80% 10%;
-    padding-top: 40px;
-    padding-bottom: 40px;
-}
-
-.bookingbutton {
-    text-align: right;
-}
-
-.bbutton {
-    font-size: 19px;
-    font-weight: 400;
-    line-height: 16px;
-    align-items: center;
-    color: #FFFFFF;
-    width: 173px;
-    height: 36px;
-    background-color: #448899;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 10px;
-    cursor: pointer;
-}
-
-.bbutton:hover {
-    background-color: #4488999c;
-}
-
-.nobooking {
-    display: grid;
-    grid-template-columns: 10% 80% 10%;
-    /* padding-bottom: 500px; */
 }
 
 .fakefooter {
@@ -285,8 +242,12 @@ input[type=number]::-webkit-inner-spin-button {
         width: 90%;
     }
 
+    .bookingperson {
+        grid-template-columns: 4% 90% 5%;
+    }
+
     .bookinglist {
-        grid-template-columns: 10% 30% 50% 10%;
+        grid-template-columns: 5% 35% 55% 5%;
     }
 }
 
@@ -296,41 +257,68 @@ input[type=number]::-webkit-inner-spin-button {
         width: 90%;
     }
 
+    .bookingperson {
+        grid-template-columns: 3% 90% 5%;
+    }
+
     .bookinglist {
-        grid-template-columns: 10% 32% 48% 10%;
+        grid-template-columns: 5% 35% 55% 5%;
     }
 }
 
 @media only screen and (max-width: 1000px) {
 
+    .maininfo {
+        grid-template-columns: 100%;
+        display: grid;
+    }
+
+    .content{
+        height: 1000px;
+    }
+
+    .contecttitle {
+        display: none;
+    }
+
+    .contactdetail{
+        margin-top: -12px;
+        margin-bottom: 30px;
+    }
+
     .container {
         width: 90%;
     }
 
-    .bookinglist {
-        grid-template-columns: 10% 35% 45% 10%;
-    }
-}
-
-@media only screen and (max-width: 900px) {
-
-    .container {
-        width: 93%;
+    .bookingperson {
+        grid-template-columns: 3% 90% 5%;
     }
 
     .bookinglist {
         grid-template-columns: 5% 40% 50% 5%;
     }
-
-    .bookingperson,
-    .bookingcontact,
-    .bookingbottom,
-    .nobooking {
-        grid-template-columns: 5% 90% 5%;
-    }
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 900px) {
+
+
+    .maininfo {
+        grid-template-columns: 100%;
+        display: grid;
+    }
+
+    .content{
+        height: 1000px;
+    }
+
+    .contecttitle {
+        display: none;
+    }
+
+    .contactdetail{
+        margin-top: -12px;
+        margin-bottom: 30px;
+    }
 
     .container {
         width: 93%;
@@ -341,10 +329,42 @@ input[type=number]::-webkit-inner-spin-button {
     }
 
     .bookingperson,
-    .bookingcontact,
-    .bookingbottom,
     .nobooking {
-        grid-template-columns: 5% 90% 5%;
+        grid-template-columns: 3% 90% 5%;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+
+    .maininfo {
+        grid-template-columns: 100%;
+        display: grid;
+    }
+
+    .content{
+        height: 1000px;
+    }
+
+    .contecttitle {
+        display: none;
+    }
+
+    .contactdetail{
+        margin-top: -12px;
+        margin-bottom: 30px;
+    }
+
+    .container {
+        width: 93%;
+    }
+
+    .bookinglist {
+        grid-template-columns: 5% 48% 42% 5%;
+    }
+
+    .bookingperson,
+    .nobooking {
+        grid-template-columns: 3% 90% 5%;
     }
 }
 
@@ -367,7 +387,8 @@ input[type=number]::-webkit-inner-spin-button {
     .bookinglist {
         height: 495px;
         display: grid;
-        grid-template-columns: 100%;
+        grid-template-columns: 90%;
+        justify-content: center;
     }
 
     .bookingpic {
@@ -386,18 +407,30 @@ input[type=number]::-webkit-inner-spin-button {
     }
 
     .maininfo {
-        height: 180px;
+        grid-template-columns: 100%;
+        display: grid;
     }
 
-    .bookingdelete {
-        text-align: right;
+    .content{
+        height: 1000px;
+    }
+
+    .contecttitle {
+        display: none;
+    }
+
+    .contactdetail{
+        margin-top: -12px;
+        margin-bottom: 30px;
+    }
+
+    .bookingtitle{
+        margin-top: 20px;
     }
 
     .bookingperson,
-    .bookingcontact,
-    .bookingbottom,
     .nobooking {
-        grid-template-columns: 0% 100% 0%;
+        grid-template-columns: 3% 90% 5%;
     }
 
 }

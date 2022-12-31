@@ -76,6 +76,7 @@ a {
     background-size: 50%;
     background-position: center;
     background-repeat: no-repeat;
+    cursor: pointer;
 }
 
 .searchmenu {
@@ -230,9 +231,9 @@ footer>div {
     background-size: cover;
 }
 
-
-
-
+.category{
+    cursor: pointer;
+}
 
 
 @media only screen and (min-width: 1201px) {
