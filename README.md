@@ -60,42 +60,42 @@ Developed using the RESTful API method based on the guideline.
 
 根據說明文件要求，使用 RESTful API 進行開發。
 
-<img src=https://user-images.githubusercontent.com/101781321/224511570-9121ecd0-4d16-48dc-a746-593b6f278aa6.JPG width=80% />
+<img src=https://user-images.githubusercontent.com/101781321/224511570-9121ecd0-4d16-48dc-a746-593b6f278aa6.JPG width=100% />
 
 
 ## Database Schema
 
-<img src=https://user-images.githubusercontent.com/101781321/224508944-735d46ae-f134-436f-bdf1-3981650c94af.JPG width=50% />
+<img src=https://user-images.githubusercontent.com/101781321/224508944-735d46ae-f134-436f-bdf1-3981650c94af.JPG width=80% />
 
 
 ## Features
 
 ### 📜 Infinite Scroll & Lazy Loading
-<img src=https://user-images.githubusercontent.com/101781321/224511319-804eeb29-c602-49ab-9b64-beb61e488998.gif width=80% />
+<img src=https://user-images.githubusercontent.com/101781321/224511319-804eeb29-c602-49ab-9b64-beb61e488998.gif width=100% />
 <br/>
 
 ### 🔎 Keyword Search
-<img src=https://user-images.githubusercontent.com/101781321/224511341-73e4ede1-e9d2-40c4-8ff7-d19d1e8d47dc.gif width=80% />
+<img src=https://user-images.githubusercontent.com/101781321/224511341-73e4ede1-e9d2-40c4-8ff7-d19d1e8d47dc.gif width=100% />
 <br/>
 
 ### 💁‍♂️ Member System
-<img src=https://user-images.githubusercontent.com/101781321/224511352-2e8bda11-fb7e-4d14-9804-9ab07c439d94.gif width=80% />
+<img src=https://user-images.githubusercontent.com/101781321/224511352-2e8bda11-fb7e-4d14-9804-9ab07c439d94.gif width=100% />
 <br/>
 
 ### 🎠 Carousel & Attraction Detail
-<img src=https://user-images.githubusercontent.com/101781321/224511363-22d56d1a-82fa-4594-b59d-4fe55ec9c0e7.gif width=80% />
+<img src=https://user-images.githubusercontent.com/101781321/224511363-22d56d1a-82fa-4594-b59d-4fe55ec9c0e7.gif width=100% />
 <br/>
 
 ### 💳 Booking & TapPay SDK
-<img src=https://user-images.githubusercontent.com/101781321/224511369-679c2953-9104-44b1-914d-f5142904d243.gif width=80% />
+<img src=https://user-images.githubusercontent.com/101781321/224511369-679c2953-9104-44b1-914d-f5142904d243.gif width=100% />
 <br/>
 
 ### 📋 Order History
-<img src=https://user-images.githubusercontent.com/101781321/224511370-229a67ce-78d3-4c39-bd0f-f32c54bc80ce.gif width=80% />
+<img src=https://user-images.githubusercontent.com/101781321/224511370-229a67ce-78d3-4c39-bd0f-f32c54bc80ce.gif width=100% />
 <br/>
 
 ### 📱 Responsive Web Design (RWD)
-<img src=https://user-images.githubusercontent.com/101781321/224511372-95c42881-1571-411f-9a2f-411c4c373d5d.gif width=80% />
+<img src=https://user-images.githubusercontent.com/101781321/224511372-95c42881-1571-411f-9a2f-411c4c373d5d.gif width=100% />
 <br/>
 
 
