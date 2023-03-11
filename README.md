@@ -95,7 +95,7 @@ Developed using the RESTful API method based on the guideline.
 <br/>
 
 ### 📱 Responsive Web Design (RWD)
-<img src=https://user-images.githubusercontent.com/101781321/224511372-95c42881-1571-411f-9a2f-411c4c373d5d.gif width=60% />
+<img src=https://user-images.githubusercontent.com/101781321/224511372-95c42881-1571-411f-9a2f-411c4c373d5d.gif width=80% />
 <br/>
 
 
