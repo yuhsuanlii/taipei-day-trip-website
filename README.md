@@ -41,7 +41,7 @@ At first, Write an additional independent ```Python``` program to store the attr
 ```Python Flask``` was used as the back-end framework, the project adopts a development method that separation of front-end and back-end. 
 According to the ```Request``` method sent by the front-end, data was obtained from the back-end using ```AJAX``` technology and returned in ```JSON``` format through ```RESTful API```.
 
-The project taked 8 weeks of intensive development.
+The project taked 6 weeks of intensive development.
 After the weekly development is completed, will sent ```Pull Request``` to the ```Reviewer```, and after obtaining consent, the ```develop``` branch will be merged into the ```main``` branch, and the code will be synchronized to the ```AWS EC2``` computer update website.
 
 在前端開發根據引導文件提供的 Figma 規劃，使用基礎的 HTML、CSS、JavaScript 進行切版加強鍛鍊基本功。
@@ -49,7 +49,7 @@ After the weekly development is completed, will sent ```Pull Request``` to the `
 使用 Python Flask 作為後端框架，採用前後端分離的方式，
 根據前端發送的 Request 方法，使用 AJAX 技術從後端獲取數據，通過 RESTful API 回傳 JSON 格式的資料。
 
-連續八週密集開發，使用 Git/GitHub 進行版本控管，
+連續六週密集開發，使用 Git/GitHub 進行版本控管，
 每週完成階段性任務後，向 Reviewer 發送 Pull Request，取得同意後將 develop 分支合併到 main 分支，並將程式碼同步到 AWS EC2 更新網站。
 
 <br/>
