@@ -100,7 +100,7 @@ Developed using the RESTful API method based on the guideline.
 
 ## Contact
 
-👋 李宥臻 YOU-ZHEN, LI
+🙋 李宥臻 YOU-ZHEN, LI
 
 📧 charlie9684@gmail.com
 
