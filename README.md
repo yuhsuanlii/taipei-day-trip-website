@@ -1,4 +1,4 @@
-# [Taipei Day-trip 📍](http://100.20.194.8:3000/)
+# Taipei Day-trip 📍
 
 Taipei Daytrip is a e-commerce tourism website.
 Adopt the development method of separating Front-End and Back-End, connect the Restful API in series, and use AJAX to obtain about 50+ public scenic spot information. 
@@ -12,7 +12,9 @@ Click on the photo of the scenic spot information to view more information, and 
 
 ## Live DEMO
 
-http://100.20.194.8:3000/
+~~http://100.20.194.8:3000/~~
+
+Currently closed, due to the free quota being full.
 
 <br/>
 
